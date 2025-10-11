@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Architecture Overview</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Material Symbols -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet"
+  />
+  <!-- Link to Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<script>
+  // 1️⃣ Build the steps array by querying all step‑* IDs
+  const steps = Array.from(
+    document.querySelectorAll('svg [id^="step-"]')
+  )
+  // sort by the number immediately after "step-"
+  .sort((a, b) => {
+    const na = Number(a.id.match(/^step-(\d+)/)[1]);
+    const nb = Number(b.id.match(/^step-(\d+)/)[1]);
+    return na - nb;
+  })
+  // map into {id, type}
+  .map(el => ({
+    id: el.id,
+    // arrows are <path> or <line> → draw, everything else → fade
+    type: /^(path|line)$/i.test(el.tagName) ? 'draw' : 'fade'
+  }));
+
+  let currentStep = 0;
+
+  // 2️⃣ Initialize: hide everything & prep arrows for drawing
+  steps.forEach(({ id, type }) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // hide now
+    el.classList.add('hidden');
+
+    // if it's an arrow, prep its dash array
+    if (type === 'draw' && (el.tagName === 'path' || el.tagName === 'line')) {
+      const len = el.getTotalLength();
+      el.style.strokeDasharray  = len;
+      el.style.strokeDashoffset = len;
+    }
+  });
+
+  // 3️⃣ Advance one step on each → press
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight') return;
+    if (currentStep >= steps.length) return;
+
+    const { id, type } = steps[currentStep];
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // unhide and play
+    el.classList.remove('hidden');
+    if (type === 'fade') el.classList.add('fade-in');
+    else if (type === 'draw') el.classList.add('drawn');
+
+    currentStep++;
+  });
+</script>
+
+  <header>
+    <h1>Architecture Overview</h1>
+  </header>
+
+<main>
+<section>
+  <h2>1. High-Level System Diagram</h2>
+  <svg width="98%" height="720px" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+      </marker>
+    </defs>
+
+    <g transform="translate(-20, 120)"> <!-- Shifted by 100px to the left -->
+
+<!-- Base blocks -->
+<rect x="50" y="140" width="150" height="50" fill="#0FA4AF" rx="8" />
+<text x="125" y="170" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">Landing Page</text>
+
+<line x1="200" y1="165" x2="266" y2="165" stroke="#333" stroke-width="2" marker-end="url(#arrow)" /> <!-- Shortened by 4px -->
+
+<rect x="270" y="140" width="150" height="50" fill="#F5C74F" rx="8" />
+<text x="345" y="170" font-family="sans-serif" font-size="14" fill="#333" text-anchor="middle">Portfolio Router</text>
+
+<line x1="420" y1="165" x2="486" y2="165" stroke="#333" stroke-width="2" marker-end="url(#arrow)" /> <!-- Shortened by 4px -->
+
+<!-- Web Projects block -->
+<rect x="490" y="10" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="565" y="30" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">Web Projects</text>
+
+<!-- Other blocks with consistent vertical space and dark orange inset border -->
+<rect x="490" y="80" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="565" y="100" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Databases</text>
+
+<!-- Databases arrows (shifted right by 70px) -->
+<path d="M640,92 H736 V78 H996" stroke="#1F8A8B" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 1: Integration -->
+<path d="M640,96 H736 V114 H992" stroke="#92C94D" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 2: Secure Practices -->
+<path d="M640,100 H732 V150 H996" stroke="#F3AA23" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 3: SQL Vulnerabilities -->
+
+<!-- Cyber block -->
+<rect x="490" y="150" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="565" y="170" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Cyber</text>
+
+<!-- Arrow to Implementation (rightwards) -->
+<path d="M640,164 H716 V172 H1270" stroke="#1F8A8B" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 1: Implementation -->
+<!-- Arrow to Cyber Security Hub (rightwards) -->
+<path d="M640,169 H710 V205 H1270" stroke="#92C94D" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 2: Cyber Security Hub -->
+
+<!-- Implementation block (moved 450px to the right) -->
+<rect x="1280" y="150" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="1355" y="170" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Implementation</text>
+
+<!-- Cyber Security Hub block (moved 450px to the right) -->
+<rect x="1280" y="190" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="1355" y="210" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Cyber Security Hub</text>
+
+<!-- Known Vulnerabilities -->
+<rect x="1530" y="106" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="1605" y="126" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle" style="font-weight: bold;">Known Vulnerabilities</text>
+
+<!-- Cryptography -->
+<rect x="1530" y="146" width="150" height="30" fill="#4CAF50" rx="8" stroke="#388E3C" stroke-width="2" />
+<text x="1605" y="166" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle" style="font-weight: bold;">Cryptography</text>
+
+<!-- Password Detection -->
+<rect x="1530" y="186" width="150" height="30" fill="#2196F3" rx="8" stroke="#1976D2" stroke-width="2" />
+<text x="1605" y="206" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle" style="font-weight: bold;">Password Detection</text>
+
+<!-- Registry Overflow -->
+<rect x="1530" y="226" width="150" height="30" fill="#FF9800" rx="8" stroke="#F57C00" stroke-width="2" />
+<text x="1605" y="246" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle" style="font-weight: bold;">Registry Overflow</text>
+
+<!-- Linux Forensics -->
+<rect x="1530" y="266" width="150" height="30" fill="#9C27B0" rx="8" stroke="#7B1FA2" stroke-width="2" />
+<text x="1605" y="286" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle" style="font-weight: bold;">Linux Forensics</text>
+
+<!-- Arrow 1: Known Vulnerabilities -->
+<path d="M1432,198 H1494 V120 H1526" stroke="#4CAF50" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+<!-- Arrow 2: Cryptography -->
+<path d="M1432,202 H1499 V160 H1526" stroke="#92C94D" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+<!-- Arrow 3: Password Detection -->
+<path d="M1432,206 H1503 V200 H1526" stroke="#F3AA23" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+<!-- Arrow 4: Registry Overflow -->
+<path d="M1432,210 H1503 V240 H1526" stroke="#6B2B7A" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+<!-- Arrow 5: Linux Forensics -->
+<path d="M1432,214 H1499 V280 H1526" stroke="#F3AA23" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+
+<rect x="490" y="220" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="565" y="240" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Linux</text>
+
+<!-- Linux Scripting block -->
+<rect x="740" y="225" width="230" height="30" fill="#607D8B" rx="8" stroke="#455A64" stroke-width="2" />
+<text x="855" y="245" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">Linux Scripting</text>
+
+<!-- Linux → Linux Scripting Arrow -->
+<path d="M640,234 H700 V240 H740" stroke="#607D8B" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+<!-- Coordinates and content shifted 26px downward -->
+<rect x="1020" y="260" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1080" y="280" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 1</text>
+
+<rect x="1180" y="260" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1240" y="280" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 2</text>
+
+<rect x="1340" y="260" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1400" y="280" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 3</text>
+
+<rect x="1020" y="320" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1080" y="340" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 4</text>
+
+<rect x="1180" y="320" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1240" y="340" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 5</text>
+
+<rect x="1340" y="320" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1400" y="340" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 6</text>
+
+<rect x="1020" y="380" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1080" y="400" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 7</text>
+
+<rect x="1180" y="380" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1240" y="400" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 8</text>
+
+<rect x="1340" y="380" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1400" y="400" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 9</text>
+
+<rect x="1020" y="440" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1080" y="460" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 10</text>
+
+<rect x="1180" y="440" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1240" y="460" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 11</text>
+
+<rect x="1340" y="440" width="120" height="30" fill="#546E7A" rx="6" stroke="#37474F" stroke-width="1.5" />
+<text x="1400" y="460" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Script 12</text>
+
+<!-- Linux Scripting Output Arrows aligned with shifted elements -->
+<!-- Arrow 1: Linux Scripting ➝ Target 1 -->
+<path d="M970,244 H980 V275 H1020" stroke="#90A4AE" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+<!-- 1 ➝ 2 -->
+<path d="M1140,275 H1180" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 2 ➝ 3 -->
+<path d="M1300,275 H1340" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 3 ➝ 4 -->
+<path d="M1460,275 H1470 V305 H1078 V320" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 4 ➝ 5 -->
+<path d="M1140,335 H1180" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 5 ➝ 6 -->
+<path d="M1300,335 H1340" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 6 ➝ 7 -->
+<path d="M1462,335 H1472 V365 H1080 V380" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 7 ➝ 8 -->
+<path d="M1138,395 H1180" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 8 ➝ 9 -->
+<path d="M1300,395 H1340" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 9 ➝ 10 -->
+<path d="M1462,395 H1472 V426 H1080 V438" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 10 ➝ 11 -->
+<path d="M1138,455 H1180" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+<!-- 11 ➝ 12 -->
+<path d="M1300,455 H1340" stroke="#90A4AE" stroke-width="1" fill="none" marker-end="url(#arrow)" />
+
+
+
+
+<rect x="490" y="290" width="150" height="30" fill="#bb4232" rx="8" stroke="#D65C10" stroke-width="2" />
+<text x="565" y="310" font-family="sans-serif" font-size="12" fill="#fff" text-anchor="middle">Metadata</text>
+
+<!-- Linux Scripting → Linux Forensics Arrow -->
+<path d="M970,240 H1480 V286 H1526"
+      stroke="#607D8B"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Web Projects ↓ Databases -->
+<path d="M567,40 V72"
+      stroke="#FFA500"
+      stroke-width="1.5"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Databases ↓ Cyber -->
+<path d="M565,110 V144"
+      stroke="#FFA500"
+      stroke-width="1.5"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Cyber ↓ Linux -->
+<path d="M565,180 V216"
+      stroke="#FFA500"
+      stroke-width="1.5"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Linux ↓ Metadata -->
+<path d="M565,250 V284"
+      stroke="#FFA500"
+      stroke-width="1.5"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Optional: Metadata ↑ Web Projects (loop back arrow) -->
+<path d="M565,320 V340 H650 V36 H640"
+      stroke="#888"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+      <!-- Arrows and curved paths from Web Projects block -->
+      <rect x="740" y="-115" width="230" height="30" fill="#E6F8F9" rx="8" stroke="#1F8A8B" stroke-width="2" />
+      <text x="855" y="-95" font-family="sans-serif" font-size="14" fill="#1F8A8B" font-weight="bold" text-anchor="middle">RPI CCTV</text>
+
+      <rect x="740" y="-75" width="230" height="30" fill="#F4FAE3" rx="8" stroke="#92C94D" stroke-width="2" />
+      <text x="855" y="-55" font-family="sans-serif" font-size="14" fill="#92C94D" font-weight="bold" text-anchor="middle">Vision Scope (RPI dashboard)</text>
+
+      <rect x="740" y="-35" width="230" height="30" fill="#E8F3FB" rx="8" stroke="#2A97D6" stroke-width="2" />
+      <text x="855" y="-15" font-family="sans-serif" font-size="14" fill="#2A97D6" font-weight="bold" text-anchor="middle">Music Galaxy</text>
+
+      <rect x="740" y="5" width="230" height="30" fill="#FFF4DE" rx="8" stroke="#F3AA23" stroke-width="2" />
+      <text x="855" y="25" font-family="sans-serif" font-size="14" fill="#F3AA23" font-weight="bold" text-anchor="middle">Fly Now</text>
+
+      <rect x="740" y="45" width="230" height="30" fill="#F3E6F9" rx="8" stroke="#6B2B7A" stroke-width="2" />
+      <text x="855" y="65" font-family="sans-serif" font-size="14" fill="#6B2B7A" font-weight="bold" text-anchor="middle">Html & PHP Tools</text>
+
+      <path d="M640,18 H700 V-98 H736" stroke="#1F8A8B" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 1 -->
+      <path d="M640,22 H704 V-58 H736" stroke="#92C94D" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 2 -->
+      <path d="M640,26 H708 V-20 H736" stroke="#2A97D6" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 3 -->
+      <path d="M640,30 H712 V18 H736" stroke="#F3AA23" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 4 -->
+      <path d="M640,33 H700 V60 H736" stroke="#6B2B7A" stroke-width="1" fill="none" marker-end="url(#arrow)" /> <!-- Arrow 5 -->
+
+      <!-- New blocks for Integration, Secure Database Practices, SQL Injection & Vulnerabilities -->
+      <!-- Adjusted positions for centered and spaced elements -->
+
+      <!-- Integration Block -->
+      <rect x="1000" y="58" width="230" height="30" fill="#1F8A8B" rx="8" stroke="#1F8A8B" stroke-width="2" />
+      <text x="1115" y="78" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">Integration</text>
+      <!-- Integration → RPI CCTV (Teal) -->
+<path d="M1230,81 H1270 V-98 H974"
+      stroke="#1F8A8B"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Integration → Vision Scope (Lime Green) -->
+<path d="M1230,77 H1266 V-58 H974"
+      stroke="#92C94D"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Integration → Music Galaxy (Sky Blue) -->
+<path d="M1230,73 H1262 V-20 H976"
+      stroke="#2A97D6"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Integration → Fly Now (Amber) -->
+<path d="M1230,69 H1258 V18 H974"
+      stroke="#F3AA23"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+<!-- Integration → HTML & PHP Tools (Purple) -->
+<path d="M1230,66 H1254 V57 H974"
+      stroke="#6B2B7A"
+      stroke-width="1"
+      fill="none"
+      marker-end="url(#arrow)" />
+
+
+      <!-- Secure Database Practices Block -->
+      <rect x="1000" y="98" width="230" height="30" fill="#92C94D" rx="8" stroke="#92C94D" stroke-width="2" />
+      <text x="1115" y="118" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">Secure Database Practices</text>
+
+      <!-- SQL Injection & Vulnerabilities Block -->
+      <rect x="1000" y="138" width="230" height="30" fill="#F3AA23" rx="8" stroke="#F3AA23" stroke-width="2" />
+      <text x="1115" y="158" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">SQL Injection & Vulnerabilities</text>
+
+    </g>
+  </svg>
+</section>
+
+<section>
+  <h2>2. Technical Stack Summary</h2>
+  <table>
+    <tr>
+      <th>Module</th>
+      <th>Technologies</th>
+    </tr>
+    <tr>
+      <td>Web Projects</td>
+      <td>HTML5, CSS3, JavaScript, Java, PHP (backend), NGINX, Apache, Tomcat</td>
+    </tr>
+    <tr>
+      <td>Databases</td>
+      <td>MySQL/MariaDB, ERD tools (e.g., MySQL Workbench)</td>
+    </tr>
+    <tr>
+      <td>Cybersecurity</td>
+      <td>XSS, SQL Injection, Buffer Overflow, Encryption, HTTPS/TLS, JWT/Auth, Vulnerability Management</td>
+    </tr>
+    <tr>
+      <td>Linux Scripting</td>
+      <td>Bash, Cron jobs, systemd units</td>
+    </tr>
+    <tr>
+      <td>Metadata</td>
+      <td>TEI/METS schemas, XSLT transformations</td>
+    </tr>
+  </table>
+</section>
+
+<!--
+    <section>
+      <h2>3. Data & Request Flow (PlantUML)</h2>
+      <div class="green-code">
+    <pre><code>
+@startuml
+actor User
+participant "Landing Page" as LP
+participant "Portfolio Router" as PR
+participant "Browser" as B
+participant "API/DB" as DB
+participant "Metadata Module" as MM
+participant "Cyber Module" as CM
+
+User -> LP: Click button
+LP -> PR: Route request
+PR -> B: Load module
+alt Web project
+  B -> DB: API call
+end
+DB -> MM: Return data
+MM -> CM: Transform & audit
+@enduml</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Deployment Architecture</h2>
+      <!-- Place the second SVG diagram from your prompt here -
+    </section>
+
+    <section>
+      <h2>5. Metadata Pipeline</h2>
+      <!-- Place the metadata pipeline SVG diagram here -
+    </section>
+
+    <section>
+      <h2>6. Configuration Snippets</h2>
+      <h4>Nginx Virtual Host</h4>
+        <div class="green-code">
+    <pre><code>
+server {
+  listen 80;
+  server_name example.com;
+  root /var/www/html;
+}</div></code></pre>
+
+      <h4>Cron Job (Bash)</h4>
+      <pre><code><div class="green-code">
+# Run backup daily at 2am
+0 2 * * * /usr/local/bin/backup.sh</code></pre>
+      </div>
+      <h4>TEI Header Snippet</h4>
+      <pre><code><teiHeader>
+  <fileDesc><titleStmt><title>Project</title></titleStmt></fileDesc>
+</teiHeader></code></pre>
+
+      <h4>UFW Firewall Rule</h4>
+      <pre><code>sudo ufw allow 443/tcp comment 'Allow HTTPS'</code></pre>
+    </section>
+  -->
+    <section>
+      <h2>7. Security Considerations</h2>
+      <ul>
+        <li><strong>Input Sanitization:</strong> XSS/SQLi prevention</li>
+        <li><strong>Content Security Policy:</strong> CSP headers</li>
+        <li><strong>Rate Limiting:</strong> prevent brute-force</li>
+        <li><strong>TLS 1.3 Only:</strong> modern encryption</li>
+      </ul>
+    </section>
+  </main>
+  </div>
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <!-- Footer Links Section -->
+    <div class="footer-links">
+      <!-- Home Section -->
+      <div class="footer-home">
+        <a href="../index.html">
+          <i class="fas fa-home"></i> Home
+        </a>
+      </div>
+      <!-- You can add more sections as needed, such as "About", "Contact", etc. -->
+    </div>
+
+    <!-- Footer Copyright -->
+    <div class="footer-copyright">
+       2025 Ambel Basha — Full Stack Developer & Cybersecurity Enthusiast</p>
+  </div>
+  </div>
+</footer>
+</body>
+</html>

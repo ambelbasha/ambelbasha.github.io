@@ -1,0 +1,270 @@
+
+/*=============================================
+  Hero Section
+=============================================*/
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: add a subtle hover “lift” once revealed */
+.section.visible:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease-out;
+}
+
+/* Hero Section */
+.hero {
+  background-color: var(--color-bg);
+  background-image: url('../Index/Images/Smokey/TurqoisePrimaryContainer.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+  color: var(--color-text);
+  text-align: center;
+  padding: 0 var(--space-sm);
+  position: relative;
+  z-index: 2;
+  min-height: 80vh !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0; /* Start with hidden background */
+  transition: opacity 2s ease-out, transform 2s ease-out; /* Smooth opacity and transform transition */
+}
+
+/* Foggy mist shadow effect at the bottom */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(to top, rgba(0, 49, 53, 1) 0%, rgba(0, 49, 53, 0.65) 50%, rgba(0, 49, 53, 0.35) 75%, rgba(0, 49, 53, 0) 100%);
+  z-index: -1;
+  transition: background 2s ease-out; /* Smoother background transition */
+}
+
+/* Foggy mist shadow effect at the top */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(0, 49, 53, 1) 0%, rgba(0, 49, 53, 0.6) 50%, rgba(0, 49, 53, 0.3) 75%, rgba(0, 49, 53, 0) 100%);
+  z-index: -1;
+  transition: background 2s ease-in-out, opacity 2s ease-in-out; /* Smoother transition */
+  opacity: 1; /* Initial opacity */
+}
+
+/* To trigger the transition */
+.hero:hover::before {
+  opacity: 0.5; /* Modify opacity to trigger smooth fade */
+}
+
+
+/* Adjust the About Section animation to prevent any "kick" on initial load */
+#about {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* When the About section becomes visible */
+#about.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section Animations for smoother transition */
+.hero.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: Add smooth hover transition */
+.hero-content h1 {
+  animation: fadeSlideUp 1.5s ease-out forwards;
+}
+
+/* Hero Content */
+.hero-content {
+  z-index: 3;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-lg) 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Hero Heading Animation */
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  margin: -2rem;
+  margin-bottom: auto;
+  background: linear-gradient(to right, #f24e1e, #04e2c5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: fadeSlideUp 1.5s ease-out forwards; /* Smooth slide-up and fade-in */
+  animation-delay: 0.3s;
+  text-align: center;
+  line-height: 1.1;
+  transform: translateY(30px); /* Starts slightly lower for smooth movement */
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Circular Picture */
+.picture-container {
+  width: clamp(200px, 20vw, 460px);
+  height: clamp(200px, 20vw, 460px);
+  background-color: var(--color-bg-alt);
+  background-image: url('../../Images/ambel.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  animation: fadeSlideUp 1.5s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+/* Hero Subheading */
+.hero-subheading {
+  font-size: clamp(1rem, 2.5vw, 2.75rem);
+  background: linear-gradient(to right, #04e2c5, #f24e1e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin: var(--space-md) auto;
+  max-width: 800px;
+  font-weight: 600;
+  opacity: 0;
+  animation: fadeSlideUp 1.5s ease-out forwards;
+  animation-delay: 0.9s;
+}
+
+/* Base CTA button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 2px solid transparent;
+  border-radius: var(--radius-xlg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  top: -20px;
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+/* CTA Primary Button */
+.cta-btn.primary {
+  background-color: var(--color-accent, #c24040);
+  border-color: var(--color-accent, #c24040);
+  color: #fff;
+}
+
+/* CTA Button Hover Effects */
+.cta-btn.primary:hover,
+.cta-btn.primary:focus {
+  background-color: var(--color-accent-hover, #a93333);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  color: #fff;
+  outline: none;
+}
+
+.cta-btn.learn-more-link {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  margin-top: var(--space-lg);
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+.cta-btn.learn-more-link:hover,
+.cta-btn.learn-more-link:focus {
+  background-color: var(--color-bg-alt);
+  color: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Icon inside CTA button */
+.cta-btn i {
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+
+/* Optional: adjust primary CTA colors */
+.cta-buttons .cta-btn {
+  background-color: var(--color-accent, #c24040);
+  border-color: var(--color-accent, #c24040);
+  color: #fff;
+}
+
+.cta-buttons .cta-btn:hover,
+.cta-buttons .cta-btn:focus {
+  background-color: var(--color-accent-hover, #a93333);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
+
+/* Smooth slide-in animation */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

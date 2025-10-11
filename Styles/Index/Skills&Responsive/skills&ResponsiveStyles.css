@@ -1,0 +1,232 @@
+
+/* =============================================
+  Skills Section
+============================================= */
+.skills {
+  width: 100%;
+  max-width: 1400px;
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg) var(--space-md);
+  background: linear-gradient(0deg, var(--color-bg-alt), var(--color-bg));
+  border-radius: var(--radius-lg);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.skills h2 {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  color: var(--color-accent-1);
+  margin-bottom: var(--space-md);
+}
+
+.skills .skill-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-sm) 0;
+}
+
+.skills .skill-box {
+  background-color: var(--color-bg-alt);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), background-color var(--transition);
+  position: relative; /* Needed for .skill-bar positioning */
+}
+
+.skills .skill-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+  transition: color var(--transition);
+}
+
+.skills .skill-box p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  transition: transform var(--transition);
+}
+
+.skills .skill-box:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-var(--space-xs));
+}
+
+.skills .skill-box:hover h3 {
+  color: var(--color-bg-hover);
+}
+
+.skills .skill-box:hover p {
+  transform: scale(1.05);
+}
+
+/* Bottom bar animation */
+.skills .skill-box .skill-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: transparent;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition), background-color var(--transition);
+}
+
+.skills .skill-box:hover .skill-bar {
+  transform: scaleX(1);
+  background-color: var(--color-primary);
+}
+
+/* ==============================================
+   1) Keyframes for Fade In & Fade Out
+============================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+/* ==============================================
+   2) Utility Classes to Trigger Them
+============================================== */
+/* You can add “.fade-in” or “.fade-out” on any element */
+.fade-in {
+  animation: fadeInUp 0.8s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.fade-out {
+  animation: fadeOutDown 0.6s ease-in forwards;
+}
+
+/* ==============================================
+   3) Hook into your IntersectionObserver classes
+============================================== */
+/* Base hidden state (no opacity) */
+.section,
+.hero-content h1,
+.picture-container,
+.hero-subheading {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* When you remove .visible (or add .hidden), fade‑out */
+.section.hidden,
+.hero-content h1.hidden,
+.picture-container.hidden,
+.hero-subheading.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeOutDown 0.6s ease-in forwards;
+}
+
+/* ==============================================
+  Media Queries for Responsive Typography & Spacing
+============================================== */
+@media (max-width: 768px) {
+  .skills h2 {
+    font-size: 2rem;
+  }
+
+  .skills {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .skills .skill-box {
+    padding: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .skills h2 {
+    font-size: 1.75rem;
+  }
+
+  .skills {
+    padding: var(--space-lg) var(--space-xs);
+  }
+
+  .skills .skill-box {
+    padding: var(--space-xs);
+  }
+}
+
+/* ==============================================
+  About Link (if needed here)
+============================================== */
+.about-link {
+  position: relative;
+  z-index: 1003;
+}
+
+/* ==============================================
+  Optional: Large Screen Typography
+============================================== */
+@media (min-width: 1200px) {
+  .hero h1 {
+    font-size: 4.375rem; /* 70px */
+  }
+  .hero p {
+    font-size: 2.75rem; /* 44px */
+  }
+  .cta-btn {
+    font-size: 1.25rem;
+    padding: 16px 32px;
+  }
+  .picture-container {
+    width: 460px;
+    height: 460px;
+  }
+}
+/* ==============================================
+  Contact Section
+============================================== */
+.contact {
+  background-color: var(--color-bg);
+  padding: var(--space-lg) 0;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2.25rem;
+  color: var(--color-text);
+}
+
+.contact p {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+}
+
+.contact .cta-btn {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  padding: 15px 30px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.125rem;
+}
+
+.contact .cta-btn:hover {
+  background-color: var(--color-secondary-dark);
+}

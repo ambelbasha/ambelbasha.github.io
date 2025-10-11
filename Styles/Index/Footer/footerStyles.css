@@ -1,0 +1,540 @@
+
+/* ============================================== 
+  Footer Section
+============================================== */
+.footer {
+  position: relative; /* for pseudo-elements */
+  background: linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
+  color: var(--color-text);
+  padding: var(--space-sm);
+  margin-left: 2.9px;
+  margin-right: 2.9px;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Side shading */
+.footer::before,
+.footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 360px; /* wider for smooth fade */
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer::before {
+  left: 0;
+  background: radial-gradient(
+    circle at left center,
+    rgba(0, 0, 0, 0.35) 0%,  /* darker near edge */
+    rgba(0, 0, 0, 0.1) 40%,  
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.footer::after {
+  right: 0;
+  background: radial-gradient(
+    circle at right center,
+    rgba(0, 0, 0, 0.35) 0%, 
+    rgba(0, 0, 0, 0.1) 40%, 
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Corner blending */
+.footer::before,
+.footer::after {
+  pointer-events: none;
+}
+
+.footer::before { /* left side corners */
+  background:
+    radial-gradient(circle at top left, var(--color-bg), rgba(0,0,0,0.0) 70%),
+    radial-gradient(circle at bottom left, var(--color-bg), rgba(0,0,0,0.0) 70%),
+    radial-gradient(circle at left center,
+      rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 100%);
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%, 100% 100%;
+  background-position: top left, bottom left, left center;
+}
+
+.footer::after { /* right side corners */
+  background:
+    radial-gradient(circle at top right, var(--color-bg), rgba(0,0,0,0) 70%),
+    radial-gradient(circle at bottom right, var(--color-bg), rgba(0,0,0,0) 70%),
+    radial-gradient(circle at right center,
+      rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 100%);
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%, 100% 100%;
+  background-position: top right, bottom right, right center;
+}
+
+.footer-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-sm);
+  background: var(--color-bg);
+  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -10px 20px rgba(0, 0, 0, 0.1); /* Vertical inset shadows */
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+/* ==============================================
+  Footer Section
+============================================== */
+.footer-container ul {
+  list-style-type: none;
+  font-weight: 100;
+  font-size: var(--xsm) !important;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-left: 0; /* Pushes list to the far right */
+}
+
+/* Adjust the list alignment within the container */
+.footer-container ul {
+  justify-content: center; /* Center the list items instead of pushing them to the right */
+  /* Other styles remain the same */
+}
+
+/* Specific Styles for Each Icon */
+
+/* Info Icon (fa-circle-info) */
+.footer-container ul li a .fa-circle-info {
+  top: 8px !important;
+  color: var(--color-info); /* Change the color */
+  font-size: var(--font-size-sm); /* Size adjustment for this specific icon */
+  margin-right: var(--space-xxs); /* Add margin between icon and text */
+  transform: translateY(-4px); /* Shift the icon up (adjust the value as needed) */
+}
+
+/* File Icon (fa-file-lines) */
+.footer-container ul li a .fa-file-lines {
+  top: 8px !important;
+  font-size: var(--font-size-sm); /* Size adjustment for this specific icon */
+  margin-right: var(--space-xxs); /* Margin between icon and text */
+  transform: translateY(-5px); /* Shift the icon up (adjust the value as needed) */
+}
+
+/* Phone Icon (fa-phone) */
+.footer-container ul li a .fa-phone {
+  top: 4px;
+  font-size: var(--font-size-sm); /* Size adjustment for this specific icon */
+  margin-right: var(--space-xxs); /* Margin between icon and text */
+  transform: translateY(-3px); /* Shift the icon up (adjust the value as needed) */
+}
+
+/* Home Icon (fa-home) */
+.footer-container ul li a .fa-home {
+  top: 4px;
+  font-size: var(--font-size-sm); /* Size adjustment for this specific icon */
+  margin-right: var(--space-xxs); /* Margin between icon and text */
+  transform: translateY(-4px); /* Shift the icon up (adjust the value as needed) */
+}
+
+/* Common icon padding */
+.footer-container ul li a i {
+  padding: 0; /* Ensure no additional padding is added */
+}
+
+/* Adjust anchor text and icons layout */
+.footer-container ul li a {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  text-decoration: none; /* Remove default underline */
+  font-size: var(--font-size-sm); /* Increased size for better readability */
+}
+
+/* Optional: Hover Effects for Icons */
+.footer-container ul li a:hover i {
+  transition: transform 0.2s ease-in-out;
+}
+
+.footer-container ul li a {
+  color: var(--color-accent-1);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: calc(var(--font-size-xsm) + 0.1rem);   /* ✅ correct */
+  position: relative;
+  padding: var(--space-xs) var(--space-sm);
+  transition: color var(--transition), transform var(--transition-fast);
+}
+
+.footer-container ul li a:hover {
+  color: var(--color-secondary);
+}
+
+.footer-container ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 4px;
+  border-radius: 5px;
+  background: var(--color-primary);
+  left: 50%;
+  bottom: -3px;
+  transform: translateX(-50%) scaleX(0);
+  transition: width 0.3s ease-out;
+}
+
+.footer-container ul li a:hover::after {
+  width: 64%;
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ==============================================
+  Visitor Count Section
+============================================== */
+#visitor-count-section {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+  gap: 5px;
+  text-align: right;
+  padding-right: var(--space-xl);
+  margin-left: var(--space-xl);
+  margin-left: var(--space-xs);
+}
+
+#visitor-count-section p {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  font-family: monospace;
+  white-space: nowrap;
+  position: relative;
+}
+
+#visitor-count-section p .number .prefix,
+#visitor-count-section p .number .digits {
+  display: inline;
+  margin: 0;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+/* Floating animation for visit increment */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+}
+
+.visit-animation {
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffcc00;
+  left: 100%;
+  margin-left: 5px;
+  animation: floatUp 1s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Footer copyright with subtle slide-in */
+.footer-copyright {
+  font-size: 0.5rem;
+  color: var(--color-accent-1);
+  margin-top: 4px;
+  text-align: right;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 0;
+  position: absolute;
+  right: 0.25rem;
+  bottom: 0;
+  animation: slideInFromRight 1s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(30px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* ==============================================
+   Keyframes for Fade-In and Fade-Out Animations
+============================================== */
+
+/* Fade-In animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px); /* Start slightly below the viewport */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at normal position */
+  }
+}
+
+/* Fade-Out animation */
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0); /* Start at normal position */
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px); /* Move element slightly down */
+  }
+}
+
+/* ==============================================
+   Base hidden state for all elements
+============================================== */
+.hidden {
+  opacity: 0;
+  transform: translateY(40px); /* Initial hidden position */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smoother transition */
+}
+
+/* ==============================================
+   Visible state - Fade-in effect when entering viewport
+============================================== */
+.visible {
+  opacity: 1;
+  transform: translateY(0); /* Reset position */
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Smooth fade-in */
+}
+
+/* ==============================================
+   Hidden state after fade-out - When leaving viewport
+============================================== */
+.hidden-fade {
+  opacity: 0;
+  transform: translateY(40px); /* Move element back down */
+  animation: fadeOutDown 0.8s ease-out forwards; /* Smooth fade-out */
+}
+
+/* ==============================================
+  Responsive Design for Mobile
+============================================== */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #visitor-count-section {
+    text-align: left;
+    margin-left: 0;
+    margin-top: var(--space-sm);
+  }
+
+  .footer-container ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    transform: none;
+  }
+
+  .portfolio-btn {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+}
+
+/* ==============================================
+  Portfolio Section
+============================================== */
+#portfolio {
+  background-color: var(--color-bg);
+  padding: var(--space-xl) var(--space-sm);
+  text-align: center;
+  color: var(--color-text);
+}
+
+#portfolio .portfolio-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#portfolio h2 {
+  font-size: 2.25rem;
+  margin-bottom: var(--space-md);
+}
+
+#portfolio p {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-lg);
+}
+
+.portfolio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  padding: 15px 30px;
+  text-transform: uppercase;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.portfolio-btn .btn-text { margin-right: var(--space-sm); }
+
+.portfolio-btn .btn-icon {
+  font-size: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.portfolio-btn:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-5px);
+}
+
+.portfolio-btn:hover .btn-icon { transform: translateX(var(--space-xs)); }
+
+.portfolio-btn:active { transform: translateY(2px); }
+
+.portfolio-btn:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(15, 164, 175, 0.6);
+}
+/* ==============================================
+  Responsive Design for Mobile (600px)
+============================================== */
+@media screen and (max-width: 600px) {
+  .projects h2, .contact h2, #portfolio h2 {
+    font-size: 1.75rem;
+  }
+
+  .projects .project-box {
+    width: 100%;
+  }
+
+  .contact p {
+    font-size: 1rem;
+  }
+
+  .portfolio-btn {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  .footer-container ul li {
+    display: block;
+    margin: var(--space-xs) 0;
+  }
+
+  .footer-container ul li a {
+    font-size: 1rem;
+  }
+
+  .picture-container {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* ==============================================
+  Keyframe Animations for Scroll Reveal
+============================================== */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==============================================
+  Hero Section Animation
+============================================== */
+.hero h1, .hero p, .picture-container {
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out forwards;
+}
+
+.hero h1 { animation-delay: 0.3s; }
+.picture-container { animation-delay: 0.6s; }
+.hero p { animation-delay: 0.9s; }
+
+/* ==============================================
+  Scroll Reveal for Portfolio Sections
+============================================== */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==============================================
+  Counter Animation (Visitor Count)
+============================================== */
+.counter {
+  opacity: 0;
+  animation: countUp 1.2s ease-out forwards;
+}
+
+.shift-up {
+  position: relative;
+  top: -2px;
+}
+
+.hidden { opacity:0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.visible { opacity:1; transform: translateY(0); animation: fade-in-up 0.8s ease-out forwards; }
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}

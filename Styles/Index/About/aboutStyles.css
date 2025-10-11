@@ -1,0 +1,168 @@
+
+/*=============================================
+  About Section
+=============================================*/
+.about {
+  width: 100%;
+  max-width: 1400px;
+  margin: var(--space-lg) auto;
+  margin-top: var(--space-xl);
+  padding: var(--space-lg) var(--space-sm);
+  background: linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
+  border-radius: var(--radius-lg);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  
+  /* Fade-in effect for the entire section */
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.about h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--color-accent-1);
+  margin-bottom: var(--space-md);
+}
+
+.about p {
+  max-width: 900px;
+  margin: 0 auto var(--space-md);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.8;
+}
+
+/* Fade-In Effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*=============================================
+  About Section Links
+=============================================*/
+.about-link {
+  display: inline-block;
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.separator {
+  display: inline-block;
+  width: 1px;
+  height: 60px;
+  background-color: var(--color-text-muted);
+  margin: -1.6rem 0.1rem;
+}
+
+/* Link Styles */
+.about-link-read,
+.about-link-portfolio {
+  border: 2px solid currentColor;
+}
+.about-link-read {
+  color: var(--color-accent-1);
+}
+.about-link-portfolio {
+  color: var(--color-primary);
+}
+.about-link-read:hover {
+  background-color: var(--color-accent-1);
+  color: var(--color-bg-alt);
+}
+.about-link-portfolio:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* Droplet Elements */
+.droplet-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.droplet {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #F5C74F, #0FA4AF, #964734, #024950);
+  opacity: 0; /* Start hidden */
+  animation: floatingGlow 3s ease-in-out infinite, diffractionGlow 5s ease-in-out infinite;
+  animation-delay: calc(-0.5s * var(--i));
+}
+
+/* Activate droplets when container is active */
+.droplet-container.active .droplet {
+  opacity: 1;
+}
+
+/* Keyframes for floating glow effect */
+@keyframes floatingGlow {
+  0% {
+    transform: translateY(0);
+    opacity: 0.4;
+    filter: blur(2px) brightness(1.2);
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.7;
+    filter: blur(4px) brightness(1.4);
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0.3;
+    filter: blur(6px) brightness(1.6);
+  }
+}
+
+/* Keyframes for diffraction glow effect */
+@keyframes diffractionGlow {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0deg);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) rotate(180deg);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(360deg);
+    filter: blur(10px);
+  }
+}
+
+/* Background Glowing Effects */
+.about::before,
+.about::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(45deg, #F5C74F, #0FA4AF, #964734, #024950);
+  border-radius: 50%;
+  filter: blur(15px);
+  opacity: 0.4;
+  animation: diffractionGlow 5s infinite alternate ease-in-out;
+}
+.about::before {
+  top: 10%;
+  left: 5%;
+}
+.about::after {
+  bottom: 10%;
+  right: 5%;
+}
