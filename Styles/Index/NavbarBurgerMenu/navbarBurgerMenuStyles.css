@@ -1,3 +1,6 @@
+/* =========================================
+   FIXED & RESPONSIVE NAVBAR (WORKING VERSION with !important alignment fixes)
+========================================= */
 
 .landing-navbar {
   position: fixed;
@@ -5,7 +8,7 @@
   left: 0;
   width: 100%;
   background: linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
-  padding: var(--space-md) 0;  /* Increased padding to make the navbar taller */
+  padding: var(--space-md) 0;
   box-shadow: var(--shadow-md);
   z-index: 100;
   animation: slideDown 0.6s ease-in-out forwards;
@@ -30,46 +33,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
-/* ==============================================
-    Burger Wrapper
-============================================== */
+.navbar-brand {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75%; /* Prevents long names from overlapping */
+}
+
+/* =============================
+   BURGER WRAPPER
+============================= */
 .burger-wrapper {
-  position: absolute;
-  top: 50%;  /* Center it vertically in the container */
-  right: calc(var(--space-xlg) + 5rem);  /* Corrected syntax for calc */
-  transform: translateY(-50%);  /* Correct vertical centering */
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 101;
-  display: flex;
-  justify-content: center;
-  align-items: center;  /* Ensures the content inside is centered */
+  position: absolute !important;
+  top: 50% !important;
+  right: 2rem !important;
+  transform: translateY(-50%) !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  pointer-events: none !important;
+  z-index: 101 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-  .burger-wrapper {
-    top: 50%;  /* Keep vertically centered */
-    transform: translateY(-50%);
-    width: 48px;   /* Smaller size for the burger */
-    height: 48px;
-  }
-}
-
-@media (max-width: 480px) {
-  .burger-wrapper {
-    top: 50%;  /* Keep vertically centered */
-    transform: translateY(-50%);
-    width: 40px;  /* Further smaller size for the burger */
-    height: 40px;
-  }
-}
-
-/* Burger menu with animation */
+/* =============================
+   BURGER MENU
+============================= */
 .burger-menu {
   --fill-angle: 0deg;
   position: relative;
@@ -110,26 +104,21 @@
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
 }
-
 .burger-menu.open span:nth-child(2) { opacity: 0; }
-
 .burger-menu.open span:nth-child(3) {
   bottom: 50%;
   transform: translateY(50%) rotate(-45deg);
 }
-
 .burger-menu:hover span { background-color: #381805; }
-.burger-wrapper.animate-cw .burger-menu { --fill-angle: 360deg; }
-.burger-wrapper.animate-ccw .burger-menu { --fill-angle: 0deg; }
 
-/* ==============================================
-    Collapsible menu (always collapsed by default)
-============================================== */
+/* =============================
+   COLLAPSIBLE MENU
+============================= */
 #menu {
   position: absolute;
-  top: 4.6rem;  /* Adjust the top distance */
+  top: 4.6rem;
   right: 2px;
-  display: none;  /* Hidden by default */
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: var(--space-xs);
@@ -141,23 +130,18 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: var(--space-xs);
   z-index: 99;
-  transition: max-height var(--transition) ease,
-              opacity var(--transition) ease,
-              transform var(--transition) ease-in-out;
+  transition: max-height var(--transition) ease, opacity var(--transition) ease, transform var(--transition) ease-in-out;
   transform: translateX(10px);
   opacity: 0;
 }
 
 #menu.open {
   display: flex;
-  max-height: calc(100vh - 6rem);  /* Adjust for the screen height */
+  max-height: calc(100vh - 6rem);
   transform: translateX(0);
   opacity: 1;
 }
 
-/* ==============================================
-    Menu Links
-============================================== */
 #menu a {
   display: block;
   width: 100%;
@@ -168,9 +152,7 @@
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   text-align: center;
-  transition: background-color var(--transition),
-              color var(--transition),
-              transform var(--transition);
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
 }
 
 #menu a:hover {
@@ -183,4 +165,40 @@
 #menu a:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* =============================
+   RESPONSIVE FIXES (with !important overrides)
+============================= */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem !important;
+  }
+
+  .navbar-brand {
+    max-width: 65% !important;
+  }
+
+  .burger-wrapper {
+    right: 1rem !important;
+    width: 48px !important;
+    height: 48px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 90% !important;
+    max-width: 60% !important;
+  }
+
+  .burger-wrapper {
+    right: 0.5rem !important;
+    width: 40px !important;
+    height: 40px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
 }
