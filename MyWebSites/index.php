@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webpages Projects</title>
-    <!--<link rel="stylesheet" href="./Styles/Animated/animated.css">-->
-    <link rel="stylesheet" href="./Styles/General/styles.css">
-    <link rel="stylesheet" href="./Styles/HeaderBurger/headerBurger.css">
-    <link rel="stylesheet" href="./Styles/StylesForIndividualHexagons/individualHexagonsLayout.css">
-    <link rel="stylesheet" href="./Styles/FooterStyles/footerStyles.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+ <!-- Stylesheets -->
+    <!-- <link rel="stylesheet" href="Styles/Animated/animated.css"> Uncomment if needed -->
+    <link rel="stylesheet" href="Styles/General/styles.css">
+    <link rel="stylesheet" href="Styles/HeaderBurger/headerBurger.css">
+    <link rel="stylesheet" href="Styles/StylesForIndividualHexagons/individualHexagonsLayout.css">
+    <link rel="stylesheet" href="Styles/FooterStyles/footerStyles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <!-- Inline Styles (if needed) -->
     <style>
     </style>
-     <script src="./Scripts/BackgroundTurqoiseVibration/turqoiseVibration.js" defer></script>
-    <script src="./Scripts/SingleInstanceManager/singleInstanceManager.js" defer></script>
-    <script src="./Scripts/ToggleBurgerMenu/toggleBurgerMenu.js" defer></script>
-    <!--<script src="./Scripts/HexagonAnimation/hexagonAnimation.js" defer></script>-->
-    <script src="./Scripts/TotalUniqueVisits/totalUniqueVisits.js" defer></script>
-    <script src="./Scripts/DigitalClock/digitalClock.js" defer></script>
-    <script src="./Scripts/ClipTextCutOut/clipTextWelcomeTitle.js" defer></script>
-   <!-- <script src="./Scripts/FooterVisibilityReachingEnd/footerVisibilityReachingEnd.js" defer></script>-->
-    <script src="./Scripts/FooterVisibility/footerVisibility.js" defer></script>
+
+    <!-- Scripts -->
+    <script src="Scripts/BackgroundTurqoiseVibration/turqoiseVibration.js" defer></script>
+    <script src="Scripts/SingleInstanceManager/singleInstanceManager.js" defer></script>
+    <script src="Scripts/ToggleBurgerMenu/toggleBurgerMenu.js" defer></script>
+    <!-- <script src="Scripts/HexagonAnimation/hexagonAnimation.js" defer></script> Uncomment if needed -->
+    <script src="Scripts/TotalUniqueVisits/totalUniqueVisits.js" defer></script>
+    <script src="Scripts/DigitalClock/digitalClock.js" defer></script>
+    <script src="Scripts/ClipTextCutOut/clipTextWelcomeTitle.js" defer></script>
+    <!-- <script src="Scripts/FooterVisibilityReachingEnd/footerVisibilityReachingEnd.js" defer></script> Uncomment if needed -->
+    <script src="Scripts/FooterVisibility/footerVisibility.js" defer></script>
 </head>
 <body>
 <!-- Header -->
