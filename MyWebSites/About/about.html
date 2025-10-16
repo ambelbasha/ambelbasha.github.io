@@ -37,7 +37,22 @@
 
   </div>
 </header>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the current URL
+    const currentURL = window.location.href;
 
+    // Convert the URL path to lowercase (keep the protocol, domain, and query parameters intact)
+    const newURL = currentURL.toLowerCase();
+
+    // Check if the URL is different (i.e., contains uppercase letters)
+    if (currentURL !== newURL) {
+        // Redirect to the lowercase version of the URL
+        window.location.replace(newURL);
+    }
+});
+
+</script>
   <main>
     <!-- About Section -->
     <section id="about" class="about-section">

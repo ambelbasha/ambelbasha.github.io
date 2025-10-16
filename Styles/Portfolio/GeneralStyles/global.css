@@ -592,7 +592,7 @@ body * {
 
 .card {
   position: relative;
-  background: var(--color-cyan-dark) url('../../Images/') no-repeat center/cover;
+  background: var(--color-cyan-dark) url('../Images/ambel.png') no-repeat center/cover;
   background-blend-mode: lighten;
   border-radius: 15px;
   overflow: hidden;

@@ -69,7 +69,20 @@
   <script
     type="module"
     src="https://unpkg.com/@google/model-viewer@latest"
-  ></script>
+  >document.addEventListener("DOMContentLoaded", function () {
+    // Get the current URL
+    const currentURL = window.location.href;
+
+    // Convert the URL path to lowercase (keep the protocol, domain, and query parameters intact)
+    const newURL = currentURL.toLowerCase();
+
+    // Check if the URL is different (i.e., contains uppercase letters)
+    if (currentURL !== newURL) {
+        // Redirect to the lowercase version of the URL
+        window.location.replace(newURL);
+    }
+});
+</script>
   <script src="Scripts/Portfolio/Animations/animations.js" defer></script>
   <script src="Scripts/Portfolio/DigitalClock/digitalClock.js" defer></script>
   <script src="Scripts/Portfolio/MenuToggler/menuToggler.js" defer></script>
@@ -129,7 +142,7 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <img src="../WebPages/Styles/Images/ambel.png" alt="Profile Picture" />
+      <img src="Styles/Images/ambel.png" alt="Profile Picture" />
       <h1>Hello, I'm Ambel Basha</h1>
 <section class="about-info"> <p> A Full-stack developer building secure, interactive digital experiences with cutting-edge tech, advanced metadata, Linux, and cybersecurity — always evolving </p> </section>
 
@@ -273,7 +286,7 @@
 <section class="section" id="cyber">
   <!-- NOTE: outer element is a DIV now (not <a>) to avoid nested-anchor invalid HTML.
        The data-href attribute preserves the original target so the whole card is clickable. -->
-  <div class="cybersecurity-link" data-href="../WebPages/MyWebSites/CyberSecurity/index.html" role="link" tabindex="0" aria-label="Open CyberSecurity hub">
+  <div class="cybersecurity-link" data-href="MyWebSites/CyberSecurity/index.html" role="link" tabindex="0" aria-label="Open CyberSecurity hub">
     <h2>🔐 Cybersecurity</h2>
 
     <div class="card">
@@ -283,7 +296,7 @@
       <div class="card-grid">
         <!-- Cybersecurity Card (Summary) -->
         <div class="cybersecurity-card card">
-          <div class="card-image" style="background-image: url('../WebPages/Styles/Portfolio/CyberStyles/CyberSecurity/vecteezy.jpg');"></div>
+          <div class="card-image" style="background-image: url('Styles/Portfolio/CyberStyles/CyberSecurity/vecteezy.jpg');"></div>
           <div class="card-content">
             <h3>🔐 Cyber Security Hub</h3>
             <p>Cybersecurity is a field I am deeply passionate about and have been involved in through various means. From building secure websites to ensuring the protection of sensitive data and implementing encryption protocols, my interest in cybersecurity has grown exponentially over time. The need to safeguard databases and secure online environments triggered my drive to dive deeper into this crucial domain. I’ve actively integrated a range of solutions to not only maintain robust and secure applications and webpages but also to effectively address and resolve challenges that arise while securing and protecting data.</p>
@@ -292,36 +305,36 @@
 
         <!-- Detailed Cybersecurity Topics (Key Concepts) -->
         <div class="card" id="key-concepts">
-          <div class="card-image" style="background-image: url('../WebPages/Styles/Portfolio/CyberStyles/CyberSecurity/CyberSecurity.png');"></div>
+          <div class="card-image" style="background-image: url('Styles/Portfolio/CyberStyles/CyberSecurity/CyberSecurity.png');"></div>
           <div class="card-content">
             <h3>🔍 Key Concepts</h3>
 
             <h5>
-              <a class="pdf-link" href="WebPages/MyWebSites/CyberSecurity/index.html#pdfTitle1">Known Vulnerabilities</a>
+              <a class="pdf-link" href="MyWebSites/CyberSecurity/index.html#pdfTitle1">Known Vulnerabilities</a>
             </h5>
             <p>Recognizing common software weaknesses and their impact on security.</p>
 
             <h5>
-              <a class="pdf-link" href="WebPages/MyWebSites/CyberSecurity/index.html#pdfTitle2">Cryptography &amp; Cryptanalysis</a>
+              <a class="pdf-link" href="MyWebSites/CyberSecurity/index.html#pdfTitle2">Cryptography &amp; Cryptanalysis</a>
             </h5>
             <p>Applying encryption and decryption for data security.</p>
 
             <h5>
-              <a class="pdf-link" href="WebPages/MyWebSites/CyberSecurity/index.html#pdfTitle3">Password Security</a>
+              <a class="pdf-link" href="MyWebSites/CyberSecurity/index.html#pdfTitle3">Password Security</a>
             </h5>
             <p>Implementing secure password management techniques.</p>
 
             <h5>
-              <a class="pdf-link" href="WebPages/MyWebSites/CyberSecurity/index.html#pdfTitle4">SQL Injection &amp; Buffer Overflow</a>
+              <a class="pdf-link" href="MyWebSites/CyberSecurity/index.html#pdfTitle4">SQL Injection &amp; Buffer Overflow</a>
             </h5>
             <p>Preventing exploits like SQL injection and buffer overflows.</p>
           </div>
         </div>
 
 <!-- Real-World Contributions -->
-<a href="WebPages/MyWebSites/CyberSecurity/index.html#pdfTitle5" class="card-link">
+<a href="MyWebSites/CyberSecurity/index.html#pdfTitle5" class="card-link">
   <div class="card" id="contributions">
-    <div class="card-image" style="background-image: url('WebPages/Styles/Portfolio/CyberStyles/CyberSecurity/LinuxForensics.png');"></div>
+    <div class="card-image" style="background-image: url('Styles/Portfolio/CyberStyles/CyberSecurity/LinuxForensics.png');"></div>
     <div class="card-content">
       <h3>🛡️ Real-World Contributions</h3>
       <p>I contributed to the National Exercise Panoptis 2018, focusing on tasks like:</p>
