@@ -3,6 +3,7 @@
   padding: var(--space-lg);
   text-align: center;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Grid Layout for Metadata Cards */
@@ -14,23 +15,80 @@
   justify-items: center;
   padding-top: var(--space-md);
   padding-bottom: var(--space-xlg);
+  box-sizing: border-box;
 }
 
-
-/* Hover Effect for Cards */
-#metadata .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  background-color: var(--color-secondary);
+/* Card Base Styles */
+#metadata .card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-#metadata .card:hover img {
-  transform: scale(1.05); /* Slight zoom-in effect */
+#metadata .card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-/* Optional: Add responsiveness for small screens */
-@media (max-width: 768px) {
+/* Hover Effect for Cards — disabled on touch devices */
+@media (hover: hover) and (pointer: fine) {
+  #metadata .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-secondary);
+  }
+
+  #metadata .card:hover img {
+    transform: scale(1.05);
+  }
+}
+
+/* Small phones (up to 480px) — 1 column */
+@media (max-width: 480px) {
+  #metadata {
+    padding: var(--space-md);
+  }
+
   #metadata .card-grid {
-    grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Large phones / small tablets (481px – 767px) — 2 columns */
+@media (min-width: 481px) and (max-width: 767px) {
+  #metadata .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablets (768px – 1023px) — 2 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #metadata .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small desktops / laptops (1024px – 1279px) — 3 columns */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #metadata .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktops (1280px and up) — 4 columns */
+@media (min-width: 1280px) {
+  #metadata .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 4K / Ultra-wide screens (1920px and up) — 5 columns */
+@media (min-width: 1920px) {
+  #metadata .card-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }

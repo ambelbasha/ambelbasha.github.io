@@ -198,29 +198,239 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Breakpoints */
+/* ==============================================
+  RESPONSIVE — All Devices
+  320px  = very small phones (Galaxy A, older iPhones)
+  480px  = small phones (iPhone SE)
+  600px  = large phones / landscape small
+  768px  = tablets portrait
+  992px  = tablets landscape / small laptops
+  1280px = standard laptops
+============================================== */
 
-/* Medium screens (Tablets) */
-@media (max-width: 992px) {
-  #cyber .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* More flexible grid layout for tablets */
-    width: 95%; /* 95% width */
-    margin: 0 auto 5rem;
-  }
-}
-
-/* Small screens (Phones) */
-@media (max-width: 768px) {
-  #cyber .card-grid {
-    grid-template-columns: 1fr; /* Single column on smaller screens */
-    width: 95%; /* 95% width */
-    margin: 0 auto 4rem;
-  }
-}
-
-/* Extra Small Screens (Very small devices like portrait phones) */
+/* ── Very small phones: up to 480px ── */
 @media (max-width: 480px) {
+
+  .section {
+    padding: 16px;
+  }
+
+  /* Single column, full width */
   #cyber .card-grid {
-    width: 95%; /* Ensure the grid takes 95% of the screen */
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: var(--space-sm);
+    margin: 0 auto var(--space-lg);
+    padding-bottom: var(--space-md);
+  }
+
+  /* Cards: compact but readable */
+  #cyber .card {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  #cyber .card-header {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+    border-radius: 10px 10px 0 0;
+  }
+
+  #cyber .card h3 {
+    font-size: 1rem;
+  }
+
+  #cyber .card h5 {
+    font-size: 0.95rem;
+    margin: 0.4rem 0 0.2rem;
+  }
+
+  #cyber .card p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  #cyber .card ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  #cyber .card ul li {
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Image ratio taller on portrait phones for better visibility */
+  #cyber .card-image {
+    aspect-ratio: 16 / 10;
+    border-radius: 10px 10px 0 0;
+  }
+
+  /* Card content spacing */
+  #cyber .card-content {
+    gap: 0.6rem;
+  }
+
+  /* Disable hover lifts on touch — they stick after tap */
+  #cyber .card:hover,
+  #cyber .card-grid .card:hover,
+  #cyber > .card:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ── Large phones / landscape: 481px – 600px ── */
+@media (min-width: 481px) and (max-width: 600px) {
+
+  .section {
+    padding: 20px;
+  }
+
+  #cyber .card-grid {
+    grid-template-columns: 1fr;
+    width: 98%;
+    gap: var(--space-sm);
+    margin: 0 auto var(--space-lg);
+    padding-bottom: var(--space-md);
+  }
+
+  #cyber .card {
+    padding: 1.1rem;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+  }
+
+  #cyber .card-header {
+    font-size: 1.2rem;
+    padding: 0.85rem;
+  }
+
+  #cyber .card h3  { font-size: 1.05rem; }
+  #cyber .card h5  { font-size: 1rem; }
+  #cyber .card p   { font-size: 0.9rem; line-height: 1.5; }
+  #cyber .card ul li { font-size: 0.9rem; }
+
+  #cyber .card:hover,
+  #cyber .card-grid .card:hover,
+  #cyber > .card:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ── Tablets portrait: 601px – 768px ── */
+@media (min-width: 601px) and (max-width: 768px) {
+
+  .section {
+    padding: 24px;
+  }
+
+  #cyber .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 97%;
+    gap: var(--space-sm);
+    margin: 0 auto var(--space-lg);
+    padding-bottom: var(--space-md);
+  }
+
+  /* On 2-col tablets let the 3rd card span full width so it doesn't orphan */
+  #cyber .card-grid .card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - var(--space-sm) / 2);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #cyber .card {
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  #cyber .card-header {
+    font-size: 1.25rem;
+    padding: 0.9rem;
+  }
+
+  #cyber .card h3  { font-size: 1.1rem; }
+  #cyber .card h5  { font-size: 1rem; }
+  #cyber .card p   { font-size: 0.9rem; }
+  #cyber .card ul li { font-size: 0.9rem; }
+
+  #cyber .card-image {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ── Tablets landscape / small laptops: 769px – 992px ── */
+@media (min-width: 769px) and (max-width: 992px) {
+
+  .section {
+    padding: 28px;
+  }
+
+  #cyber .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    width: 97%;
+    gap: var(--space-md);
+    margin: 0 auto 5rem;
+    padding-bottom: var(--space-md);
+  }
+
+  #cyber .card {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  #cyber .card-header {
+    font-size: 1.35rem;
+  }
+
+  #cyber .card h3  { font-size: 1.15rem; }
+  #cyber .card h5  { font-size: 1.05rem; }
+  #cyber .card p   { font-size: 0.95rem; }
+}
+
+/* ── Standard laptops: 993px – 1280px ── */
+@media (min-width: 993px) and (max-width: 1280px) {
+
+  #cyber .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    width: 97%;
+    gap: var(--space-md);
+    margin: 0 auto 6rem;
+  }
+
+  #cyber .card {
+    padding: 1.35rem;
+  }
+}
+
+/* ── Touch devices: suppress all hover side-effects ── */
+@media (hover: none) and (pointer: coarse) {
+
+  /* No transform lift on tap */
+  #cyber .card:hover,
+  #cyber .card-grid .card:hover,
+  #cyber > .card:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-cyan-dark);
+  }
+
+  /* Keep content background transparent as originally set */
+  #cyber .card-grid .card:hover .card-content,
+  #cyber .card-grid .card-content:hover {
+    background-color: transparent;
+  }
+
+  /* Keep text colours stable — no hover colour flash on tap */
+  #cyber .card-grid .card:hover .card-content h5,
+  #cyber .card-grid .card:hover .card-content li {
+    color: inherit !important;
+    transition: none;
   }
 }

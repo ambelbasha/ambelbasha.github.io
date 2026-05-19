@@ -231,12 +231,112 @@
   padding-right: var(--space-lg);
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
+/* ==============================================
+  RESPONSIVE — All Devices
+  480px  = small phones (SE, Galaxy A)
+  600px  = large phones / landscape small
+  768px  = tablets portrait
+  1024px = tablets landscape / small laptops
+  1280px = standard laptops
+============================================== */
+
+/* ── Small phones: 480px and below ── */
+@media (max-width: 480px) {
+  #webprojects {
+    padding: var(--space-md) 0;
+  }
+
+  .web-project-header {
+    margin: var(--space-xs) auto;
+  }
+
+  #web-project-header h3 {
+    font-size: var(--font-size-md);
+  }
+
+  #web-project-header h3 span.material-symbols-outlined {
+    font-size: 1.2rem;
+  }
+
+  .project-intro-container {
+    width: 100%;
+    padding: var(--space-xs);
+  }
+
+  .project-intro {
+    font-size: var(--font-size-sm);
+    padding: var(--space-xs);
+    margin: var(--space-xs) auto;
+    line-height: 1.5;
+  }
+
+  .project-intro strong {
+    font-size: var(--font-size-sm);
+  }
+
+  /* Stack columns full-width */
   .project-column {
-    flex: 1 1 100%;  /* Columns stack on mobile */
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: unset;
+    min-height: auto;
     margin-bottom: var(--space-sm);
-    max-width: 100%;  /* Remove max-width on mobile for better use of space */
+    padding: var(--space-sm);
+  }
+
+  .project-columns {
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+  }
+
+  /* Card grid: single column */
+  #webprojects .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    margin: 0 auto var(--space-lg);
+    padding: 0 var(--space-xs);
+  }
+
+  #webprojects .card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  /* "Go to project" — always visible on touch */
+  .project-column::after {
+    display: block;
+    position: static;
+    transform: none;
+    font-size: var(--font-size-xs);
+    margin-top: var(--space-xs);
+    text-align: center;
+    animation: none;
+    opacity: 1;
+  }
+
+  /* Honeycomb: hide on very small screens (too cramped) */
+  .honeycomb {
+    display: none;
+  }
+
+  /* Padding overrides for specific columns */
+  #cctv-dashboard { padding-left: var(--space-sm); }
+  #php-snippets   { padding-right: var(--space-sm); }
+
+  .footer-container ul li { display: block; margin: var(--space-xs) 0; }
+  .footer-container ul li a { font-size: 1rem; }
+  .picture-container { width: 120px; height: 120px; }
+}
+
+/* ── Large phones / landscape: 481px – 600px ── */
+@media (min-width: 481px) and (max-width: 600px) {
+  .project-column {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-height: auto;
+    margin-bottom: var(--space-sm);
   }
 
   .project-columns {
@@ -244,6 +344,202 @@
     gap: var(--space-sm);
     padding-left: var(--space-sm);
     padding-right: var(--space-sm);
+  }
+
+  #webprojects .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    padding: 0 var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .project-intro {
+    font-size: var(--font-size-sm);
+    width: 95%;
+  }
+
+  .project-column::after {
+    display: block;
+    position: static;
+    transform: none;
+    margin-top: var(--space-xs);
+    text-align: center;
+    animation: none;
+    opacity: 1;
+  }
+
+  .honeycomb {
+    display: none;
+  }
+
+  .projects h2,
+  .contact h2,
+  #portfolio h2 { font-size: 1.75rem; }
+  .contact p    { font-size: 1rem; }
+  .portfolio-btn { font-size: 16px; padding: 12px 24px; }
+  .footer-container ul li { display: block; margin: var(--space-xs) 0; }
+  .footer-container ul li a { font-size: 1rem; }
+  .picture-container { width: 120px; height: 120px; }
+}
+
+/* ── Tablets portrait: 601px – 768px ── */
+@media (min-width: 601px) and (max-width: 768px) {
+  .project-column {
+    flex: 1 1 calc(50% - var(--space-md));
+    max-width: calc(50% - var(--space-md));
+    min-height: 320px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .project-columns {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  #webprojects .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    padding: 0 var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .project-intro {
+    font-size: var(--font-size-sm);
+    width: 90%;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .footer-hub {
+    width: min(400px, 100%);
+  }
+
+  #visitor-count-section {
+    justify-content: center;
+    text-align: center;
+    padding-right: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .footer-container ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .footer-copyright {
+    position: static;
+    text-align: center;
+    justify-content: center;
+    padding: 6px 0 2px;
+    font-size: 0.55rem;
+  }
+
+  .portfolio-btn {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  .honeycomb {
+    max-width: 100%;
+    justify-content: center;
+    margin: 40px auto;
+  }
+}
+
+/* ── Tablets landscape / small laptops: 769px – 1024px ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .project-column {
+    flex: 1 1 calc(50% - var(--space-lg));
+    max-width: calc(50% - var(--space-lg));
+    min-height: 340px;
+  }
+
+  .project-columns {
+    gap: var(--space-md);
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  #webprojects .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: 5rem;
+  }
+
+  .project-intro {
+    width: 85%;
+    font-size: var(--font-size-sm);
+  }
+
+  .honeycomb {
+    max-width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Standard laptops: 1025px – 1280px ── */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .project-column {
+    flex: 1 1 calc(33.33% - var(--space-lg));
+    max-width: calc(33.33% - var(--space-lg));
+  }
+
+  #webprojects .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .project-intro {
+    width: 80%;
+  }
+}
+
+/* ── Touch: disable hover-only effects, show "Go to project" always ── */
+@media (hover: none) and (pointer: coarse) {
+  .project-column:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+    background-color: var(--color-bg-alt);
+  }
+
+  .project-column:hover p {
+    color: var(--color-text);
+    font-weight: inherit;
+    text-shadow: none;
+  }
+
+  .project-column:hover h4,
+  .project-column:hover h3 {
+    color: inherit;
+    text-shadow: none;
+  }
+
+  .project-column::after {
+    display: block;
+    position: static;
+    transform: none;
+    margin-top: var(--space-xs);
+    text-align: center;
+    animation: none;
+    opacity: 1;
+    left: unset;
+    bottom: unset;
+  }
+
+  .project-intro:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: var(--color-bg-alt);
   }
 }
 

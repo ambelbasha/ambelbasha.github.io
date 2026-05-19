@@ -74,23 +74,176 @@ h2 {
   background-color: var(--color-bg);
 }
 
-/* Ensure grid adapts on smaller screens */
-@media (max-width: 992px) {
-  #database .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-}
+/* ==============================================
+  RESPONSIVE — All Devices
+  320px  = very small phones (Galaxy A, older iPhones)
+  480px  = small phones (iPhone SE)
+  600px  = large phones / landscape small
+  768px  = tablets portrait
+  992px  = tablets landscape / small laptops
+  1280px = standard laptops
+============================================== */
 
-@media (max-width: 600px) {
+/* ── Very small phones: 320px – 480px ── */
+@media (max-width: 480px) {
+
+  /* Section layout */
+  #database,
+  #vulnerabilities {
+    padding: var(--space-md) 0;
+    width: 100%;
+  }
+
+  /* Header */
+  #database-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    padding: 0 var(--space-sm);
+  }
+
+  #database-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  #database-header h2 {
+    font-size: var(--font-size-md);
+  }
+
+  #database-header-intro h2,
+  #vulnerabilities-header-intro h2 {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .card-header h2 {
+    font-size: 0.95rem;
+  }
+
+  /* Card grid: single column, full width */
   #database .card-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    width: 100%;
+    margin: 0 auto var(--space-md);
+    padding: 0 var(--space-xs);
   }
-}
 
-@media (max-width: 768px) {
+  /* Content containers */
+  #database-content,
+  #vulnerabilities-content {
+    width: 100%;
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+    border-radius: var(--radius-md);
+  }
+
+  /* Card rows: stack vertically */
   .database-row {
     flex-direction: column;
     align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .database-row .database-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  /* Individual cards */
+  .database-card,
+  .vulnerabilities-card {
+    width: 100%;
+    padding: var(--space-sm);
+    padding-top: 1rem;
+  }
+
+  .database-columns .database-card,
+  .vulnerabilities-columns .vulnerabilities-card {
+    padding: var(--space-xs);
+  }
+
+  /* Card header */
+  .card-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-header::before {
+    margin-bottom: var(--space-xs);
+    width: 1.8rem;
+    height: 2rem;
+  }
+
+  /* Material icons */
+  .material-symbols-outlined {
+    font-size: 3rem;
+  }
+
+  /* Disable sibling-dim effect on touch: too jarring */
+  .database-columns .database-card:hover ~ .database-card,
+  .vulnerabilities-columns .vulnerabilities-card:hover ~ .vulnerabilities-card {
+    opacity: 1;
+  }
+
+  .database-row:hover .database-card {
+    opacity: 1;
+  }
+}
+
+/* ── Large phones / landscape: 481px – 600px ── */
+@media (min-width: 481px) and (max-width: 600px) {
+
+  #database,
+  #vulnerabilities {
+    width: 100%;
+    padding: var(--space-md) 0;
+  }
+
+  #database-header {
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: 0 var(--space-sm);
+  }
+
+  #database-header h1 { font-size: var(--font-size-xl); }
+  #database-header h2 { font-size: var(--font-size-md); }
+
+  #database-header-intro h2,
+  #vulnerabilities-header-intro h2 {
+    font-size: 1.25rem;
+  }
+
+  #database .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: 0 var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  #database-content,
+  #vulnerabilities-content {
+    width: 98%;
+    padding: var(--space-sm);
+  }
+
+  .database-row {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .database-row .database-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .database-card,
+  .vulnerabilities-card {
+    width: 100%;
+    padding: var(--space-sm);
   }
 
   .card-header {
@@ -98,12 +251,175 @@ h2 {
     align-items: center;
   }
 
-  #database-content {
-    width: 100%;
+  .card-header::before {
+    margin-bottom: var(--space-xs);
   }
 
-  .database-card {
-    padding: var(--space-sm); /* Adjust padding for smaller screens */
+  .material-symbols-outlined {
+    font-size: 3.5rem;
+  }
+
+  .database-columns .database-card:hover ~ .database-card,
+  .vulnerabilities-columns .vulnerabilities-card:hover ~ .vulnerabilities-card {
+    opacity: 1;
+  }
+
+  .database-row:hover .database-card {
+    opacity: 1;
+  }
+}
+
+/* ── Tablets portrait: 601px – 768px ── */
+@media (min-width: 601px) and (max-width: 768px) {
+
+  #database,
+  #vulnerabilities {
+    width: 100%;
+    padding: var(--space-lg) 0;
+  }
+
+  #database-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0 var(--space-sm);
+  }
+
+  #database-header-intro,
+  #vulnerabilities-header-intro {
+    flex-direction: column;
+    text-align: center;
+    padding-left: 1rem;
+    background-size: 1.5rem 1.5rem;
+  }
+
+  #database-header-intro h2,
+  #vulnerabilities-header-intro h2 {
+    font-size: 1.4rem;
+  }
+
+  #database .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    width: 98%;
+    margin-bottom: var(--space-lg);
+  }
+
+  #database-content,
+  #vulnerabilities-content {
+    width: 97%;
+    padding: var(--space-md);
+  }
+
+  .database-row {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .database-row .database-card {
+    flex: 1 1 calc(50% - var(--space-sm));
+    max-width: 100%;
+  }
+
+  .database-card,
+  .vulnerabilities-card {
+    width: 100%;
+    padding: var(--space-sm);
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-header::before {
+    margin-bottom: var(--space-sm);
+  }
+
+  .material-symbols-outlined {
+    font-size: 4rem;
+  }
+}
+
+/* ── Tablets landscape / small laptops: 769px – 992px ── */
+@media (min-width: 769px) and (max-width: 992px) {
+
+  #database-header-intro,
+  #vulnerabilities-header-intro {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #database .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    width: 97%;
+  }
+
+  #database-content,
+  #vulnerabilities-content {
+    width: 96%;
+  }
+
+  .database-row {
+    flex-wrap: wrap;
+  }
+
+  .database-row .database-card {
+    flex: 1 1 calc(50% - var(--space-md));
+  }
+}
+
+/* ── Standard laptops: 993px – 1280px ── */
+@media (min-width: 993px) and (max-width: 1280px) {
+
+  #database .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    width: 96%;
+  }
+
+  .database-row .database-card {
+    flex: 1 1 calc(33.33% - var(--space-md));
+  }
+}
+
+/* ── Touch devices: disable hover side-effects ── */
+@media (hover: none) and (pointer: coarse) {
+
+  /* No transform on tap — prevents sticky hover states */
+  .database-card:hover,
+  .vulnerabilities-card:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-bg-alt);
+    filter: none;
+  }
+
+  /* Disable sibling dim — confusing on touch */
+  .database-columns .database-card:hover ~ .database-card,
+  .vulnerabilities-columns .vulnerabilities-card:hover ~ .vulnerabilities-card,
+  .database-card.integration:hover ~ .database-card.secure .card-header::before,
+  .database-card.integration:hover ~ .vulnerabilities-card.vulnerabilities .card-header::before,
+  .database-card.secure:hover ~ .database-card.integration .card-header::before,
+  .database-card.secure:hover ~ .vulnerabilities-card.vulnerabilities .card-header::before,
+  .database-card.vulnerabilities:hover ~ .database-card.integration .card-header::before,
+  .database-card.vulnerabilities:hover ~ .vulnerabilities-card.secure .card-header::before {
+    opacity: 1;
+  }
+
+  .database-row:hover .database-card {
+    opacity: 1;
+  }
+
+  #database-content:hover {
+    transform: none;
+    background-color: var(--color-cyan-dark);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .database-card:hover p,
+  .vulnerabilities-card:hover p {
+    color: inherit;
   }
 }
 
@@ -379,62 +695,4 @@ h2 {
   color: var(--color-text);
 }
 
-/* ---------------------------------------------
-   Media Queries
---------------------------------------------- */
-
-@media (max-width: 992px) {
-  #database-header-intro,
-  #vulnerabilities-header-intro {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .database-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card-header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card-header::before {
-    margin-bottom: var(--space-sm);
-  }
-
-  #database-header-intro,
-  #vulnerabilities-header-intro {
-    padding-left: 1rem;
-    background-size: 1.5rem 1.5rem;
-  }
-
-  #database-header-intro h2,
-  #vulnerabilities-header-intro h2 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  #database-header-intro h2,
-  #vulnerabilities-header-intro h2 {
-    font-size: 1.2rem;
-  }
-
-  .card-header h2 {
-    font-size: 1rem;
-  }
-
-  #database-content,
-  #vulnerabilities-content {
-    padding: var(--space-sm);
-  }
-
-  .database-columns .database-card,
-  .vulnerabilities-columns .vulnerabilities-card {
-    padding: var(--space-xs);
-  }
-}
+/* Media queries consolidated into the full responsive system above */
