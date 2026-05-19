@@ -1,34 +1,61 @@
 /* ==============================================
-  Footer — Depth Fly-In (IntersectionObserver)
-  Matches the wormhole perspective style of About / Skills.
-  footer.footer.hidden/visible is more specific than the generic
-  .hidden/.visible rules below, so these always win.
+  Footer — Expand-from-Centre Reveal
+  The footer wrapper fades in normally.
+  The inner .footer-container expands from a
+  single vertical centre line (scaleX: 0 → 1),
+  giving a clean "wipe open" feel.
 ============================================== */
+
+/* ── Keyframe: centre-line → full width ── */
+@keyframes footerExpandIn {
+  0%   { clip-path: inset(0 50% 0 50%); opacity: 0; }
+  18%  { opacity: 1; }
+  100% { clip-path: inset(0 0% 0 0%);   opacity: 1; }
+}
+
+@keyframes footerCollapseOut {
+  0%   { clip-path: inset(0 0% 0 0%);   opacity: 1; }
+  82%  { opacity: 0.4; }
+  100% { clip-path: inset(0 50% 0 50%); opacity: 0; }
+}
+
+/* ── Footer wrapper: subtle fade only ── */
+footer.footer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 footer.footer.hidden {
   opacity: 0;
-  transform: translateY(28px);
   transition: none;
   animation: none;
 }
 
+footer.footer.hidden .footer-container {
+  animation: footerCollapseOut 0.55s cubic-bezier(0.4, 0, 0.8, 0) forwards;
+}
+
 footer.footer.visible {
   opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity   0.9s ease,
-    transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.4s ease;
   animation: none;
-  will-change: opacity, transform;
+  will-change: opacity;
+}
+
+/* ── Inner container: expand from centre line ── */
+footer.footer.visible .footer-container {
+  animation: footerExpandIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Reverse-scroll departure */
 footer.footer.leaving {
   opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity   0.65s ease-in,
-    transform 0.8s  cubic-bezier(0.7, 0, 0.84, 0);
+  transition: opacity 0.55s ease-in;
   animation: none;
+}
+
+footer.footer.leaving .footer-container {
+  animation: footerCollapseOut 0.5s cubic-bezier(0.4, 0, 0.8, 0) forwards;
 }
 
 /* ==============================================
@@ -109,6 +136,11 @@ footer.footer.leaving {
   flex-wrap: wrap;
   position: relative;
   z-index: 10;
+  /* Needed so clip-path animation doesn't create layout artefacts */
+  overflow: hidden;
+  transform-origin: center center;
+  /* Default state: fully visible so Chrome fallback works */
+  clip-path: inset(0 0% 0 0%);
 }
 
 /* ==============================================
