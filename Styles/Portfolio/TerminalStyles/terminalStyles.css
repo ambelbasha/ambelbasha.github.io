@@ -1,57 +1,119 @@
-/* Terminal */
+/* =============================================
+   Terminal — Fully Responsive
+   ============================================= */
+
 .terminal {
-  background: #000;                     /* Pure black background */
-  color: var(--color-terminal-green);                       /* Green text for terminal-style look */
+  background: #000;
+  color: var(--color-terminal-green);
   font-family: 'Monaco', 'Courier New', monospace;
-  padding: 20px;
+  padding: clamp(12px, 3vw, 20px);
   border-radius: 12px;
   white-space: pre-wrap;
-  min-height: 280px;
+  word-break: break-word;        /* prevent long lines from overflowing */
+  overflow-wrap: break-word;
+  min-height: clamp(160px, 30vw, 280px);
   margin-bottom: var(--space-xlg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
-  line-height: 1.4;
-  font-size: 1rem;
+  overflow-x: hidden;            /* no horizontal scroll on mobile */
+  line-height: 1.6;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
 
-/* Center the Linux Commands title inside its card */
-.linux-card .card-content h3 {
-  text-align: center;    /* center text inside its container */
-  margin: 0 auto 1rem;   /* auto left/right margins, with a bottom gap */
-  width: fit-content;    /* shrink‐wrap to the text width */
-}
-/* Linux Card Hover */
-.linux-card.card:hover {
-  background-color: var(--color-secondary);
-  transform: translateY(-6px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+/* ── Small phones (≤ 480px) ───────────────── */
+@media (max-width: 480px) {
+  .terminal {
+    font-size: clamp(0.65rem, 3.5vw, 0.8rem);
+    padding: 10px;
+    border-radius: 8px;
+    min-height: 140px;
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+  }
 }
 
-/* Ensure the terminal inside also adapts on hover */
-.linux-card.card:hover .terminal {
-  box-shadow: 0 4px 15px rgba(10, 153, 10, 0.5);
+/* ── Tablets (481px – 768px) ──────────────── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .terminal {
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    padding: 14px;
+    min-height: 200px;
+    margin-bottom: var(--space-lg);
+  }
 }
 
-/* Blinking cursor */
+/* ── Large desktops (≥ 1920px) ───────────── */
+@media (min-width: 1920px) {
+  .terminal {
+    font-size: 1.1rem;
+    padding: 28px;
+    min-height: 320px;
+  }
+}
+
+/* =============================================
+   Blinking Cursor
+   ============================================= */
 .terminal::after {
   content: '';
   display: inline-block;
-  width: 8px;
-  height: 18px;
+  width: clamp(5px, 1vw, 8px);
+  height: clamp(14px, 2vw, 18px);
   background: red;
   margin-left: 5px;
+  vertical-align: text-bottom;
   animation: blink 1s infinite;
 }
 
-/* Blinking effect for cursor */
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50%      { opacity: 0; }
+  50%       { opacity: 0; }
 }
 
-/* Optional: Add a subtle glow effect on hover for interactivity */
-.terminal:hover {
-  box-shadow: 0 4px 15px rgba(10, 153, 10, 0.5); /* Glowing green effect on hover */
-  transition: box-shadow 0.3s ease-in-out; /* Smooth transition for glowing effect */
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .terminal::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* =============================================
+   Linux Card
+   ============================================= */
+.linux-card .card-content h3 {
+  text-align: center;
+  margin: 0 auto 1rem;
+  width: fit-content;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+}
+
+/* Hover — mouse devices only */
+@media (hover: hover) and (pointer: fine) {
+  .linux-card.card:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-6px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  .linux-card.card:hover .terminal {
+    box-shadow: 0 4px 15px rgba(10, 153, 10, 0.5);
+  }
+
+  .terminal:hover {
+    box-shadow: 0 4px 15px rgba(10, 153, 10, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+}
+
+/* Active state for touch devices */
+.linux-card.card:active {
+  background-color: var(--color-secondary-dark);
+  transform: translateY(0);
 }
