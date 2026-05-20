@@ -99,6 +99,183 @@
   animation: none;
 }
 
+/* ── Skill-box inner content: cascade on scroll ────────────────────────────
+   h3 arrives first, .skill-value second, .skill-tech last.
+   On departure they leave in reverse order.
+────────────────────────────────────────────────────────────────────────── */
+.skills .skill-box.hidden h3,
+.skills .skill-box.hidden .skill-value,
+.skills .skill-box.hidden .skill-tech {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: none;
+}
+
+.skills .skill-box.visible h3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: calc(var(--box-index, 0) * 0.09s + 0.10s);
+}
+
+.skills .skill-box.visible .skill-value {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: calc(var(--box-index, 0) * 0.09s + 0.22s);
+}
+
+.skills .skill-box.visible .skill-tech {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: calc(var(--box-index, 0) * 0.09s + 0.36s);
+}
+
+/* Departure: tech leaves first, value second, title last */
+.skills .skill-box.leaving h3 {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease-in, transform 0.4s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: calc((6 - var(--box-index, 0)) * 0.06s + 0.12s);
+}
+
+.skills .skill-box.leaving .skill-value {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease-in, transform 0.4s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: calc((6 - var(--box-index, 0)) * 0.06s + 0.06s);
+}
+
+.skills .skill-box.leaving .skill-tech {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease-in, transform 0.4s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: calc((6 - var(--box-index, 0)) * 0.06s + 0.00s);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ABOUT SECTION — Scroll reveal matching the skills depth fly-in system
+   The observer.js already toggles .hidden / .visible / .leaving on
+   .animate-on-scroll elements. These rules give the about section the
+   same entrance / exit personality as the skills section.
+══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.about.hidden {
+  opacity: 0;
+  transition: none;
+  animation: none;
+}
+
+.about.visible {
+  opacity: 1;
+  transition: opacity 0.85s ease;
+  animation: none;
+}
+
+.about.leaving {
+  opacity: 0;
+  transition: opacity 0.6s ease-in;
+  animation: none;
+}
+
+/* ── h2 "About Me" — depth fly-in matching skills heading ── */
+.about.hidden .container > h2 {
+  opacity: 0;
+  transform: perspective(1400px) translateZ(-2000px) scale(0.03);
+}
+
+.about.visible .container > h2 {
+  opacity: 1;
+  transform: perspective(1400px) translateZ(0) scale(1);
+  transition:
+    opacity   0.9s ease,
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: none;
+}
+
+.about.leaving .container > h2 {
+  opacity: 0;
+  transform: perspective(1400px) translateZ(-2000px) scale(0.03);
+  transition:
+    opacity   0.6s ease-in,
+    transform 1.0s cubic-bezier(0.7, 0, 0.84, 0);
+  animation: none;
+}
+
+/* ── Child elements: staggered fade-up (--about-index set via CSS order) ──
+   hero-overview = index 0
+   p:nth-of-type(1) = index 1
+   p:nth-of-type(2) = index 2
+   .about-links    = index 3
+────────────────────────────────────────────────────────────────────────── */
+.about.hidden .hero-overview,
+.about.hidden .about-header p,
+.about.hidden .about-links {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: none;
+}
+
+/* Appear — each child 120ms apart */
+.about.visible .hero-overview {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.65s ease, transform 0.85s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: 0.30s;
+}
+
+.about.visible .about-header p:nth-of-type(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.65s ease, transform 0.85s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: 0.46s;
+}
+
+.about.visible .about-header p:nth-of-type(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.65s ease, transform 0.85s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: 0.62s;
+}
+
+.about.visible .about-links {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.65s ease, transform 0.85s cubic-bezier(0.16,1,0.3,1);
+  transition-delay: 0.78s;
+}
+
+/* Departure — reverse order, faster */
+.about.leaving .hero-overview {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease-in, transform 0.5s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: 0.18s;
+}
+
+.about.leaving .about-header p:nth-of-type(1) {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease-in, transform 0.5s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: 0.12s;
+}
+
+.about.leaving .about-header p:nth-of-type(2) {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease-in, transform 0.5s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: 0.06s;
+}
+
+.about.leaving .about-links {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease-in, transform 0.5s cubic-bezier(0.7,0,0.84,0);
+  transition-delay: 0.00s;
+}
+
 .skills h2 {
   font-size: clamp(2rem, 3vw, 2.5rem);
   color: var(--color-accent-1);
@@ -143,8 +320,17 @@
   color: var(--color-bg-hover);
 }
 
-.skills .skill-box:hover p {
+.skills .skill-box:hover p:not(.skill-value):not(.skill-tech) {
   transform: scale(1.05);
+}
+
+/* skill-value and skill-tech get a softer opacity lift on hover instead */
+.skills .skill-box:hover .skill-value {
+  opacity: 0.95;
+}
+
+.skills .skill-box:hover .skill-tech {
+  opacity: 0.75;
 }
 
 /* Bottom bar animation */

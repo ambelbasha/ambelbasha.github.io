@@ -32,81 +32,57 @@
   <link rel="stylesheet" href="Styles/Index/General/generalStyles.css" />
   <link rel="stylesheet" href="Styles/Index/HeroCTAButtons/heroCTAButtons.css" />
   <link rel="stylesheet" href="Styles/Index/NavbarBurgerMenu/navbarBurgerMenuStyles.css" />
-  <link rel="stylesheet" href="Styles/Index/Skills&Responsive/skills_ResponsiveStyles.css" />
+  <link rel="stylesheet" href="Styles/Index/Skills&Responsive/skills&ResponsiveStyles.css" />
   <link rel="stylesheet" href="Styles/Index/Corridor/corridorStyles.css" />
 
   <style>
-    /* ═══════════════════════════════════════════════════════════════════
-       CORRIDOR — Three-tier domain list (panel-skills only)
-       .domain-label  — domain name, accent colour, uppercase
-       .domain-value  — plain-English sentence, primary readable line
-       .domain-tech   — compact tech stack, muted monospace
-    ═══════════════════════════════════════════════════════════════════ */
+    /* ── Panel-skills: two-tier domain list ─────────────────────────────────
+       .domain-main  = the tech stack line  (existing visible weight)
+       .domain-sub   = plain-English gloss  (muted, smaller, for all audiences)
+    ─────────────────────────────────────────────────────────────────────── */
+
     #panel-skills .domain-list li {
+      /* Allow dot + body to sit side-by-side */
       display: flex;
       align-items: flex-start;
-      gap: 0.6em;
-      margin-bottom: 0.8em;
+      gap: 0.55em;
+      /* A little more vertical room now each item has two lines */
+      margin-bottom: 0.65em;
     }
+
     #panel-skills .domain-dot {
-      margin-top: 0.42em;
+      /* Keep dot vertically centred to the main line, not the whole block */
+      margin-top: 0.35em;
       flex-shrink: 0;
     }
+
     #panel-skills .domain-body {
       display: flex;
       flex-direction: column;
-      gap: 0.1em;
-    }
-    #panel-skills .domain-label {
-      font-size: 0.72em;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--color-accent-1, #6ee7b7);
-      line-height: 1.2;
-    }
-    #panel-skills .domain-value {
-      font-size: 0.91em;
-      line-height: 1.48;
-      color: var(--color-text, #e2e8f0);
-    }
-    #panel-skills .domain-tech {
-      font-size: 0.67em;
-      line-height: 1.4;
-      font-family: 'Space Mono', 'Fira Code', monospace;
-      color: var(--color-text-muted, #8a9bb0);
-      letter-spacing: 0.02em;
-      margin-top: 0.12em;
-    }
-    @media (max-width: 600px) {
-      #panel-skills .domain-value { font-size: 0.85em; }
-      #panel-skills .domain-tech  { font-size: 0.62em; }
+      gap: 0.18em;
     }
 
-    /* ═══════════════════════════════════════════════════════════════════
-       SKILLS SECTION — Two-tier skill-box
-       .skill-value  — plain-English value proposition
-       .skill-tech   — compact tech stack, separated by hairline
-    ═══════════════════════════════════════════════════════════════════ */
-    .skill-box .skill-value {
-      font-size: 0.93em;
-      line-height: 1.6;
-      color: var(--color-text, #e2e8f0);
-      margin: 0 0 0.55em;
+    #panel-skills .domain-main {
+      /* Inherits the existing .domain-list li font — no change for tech readers */
+      line-height: 1.35;
     }
-    .skill-box .skill-tech {
-      font-size: 0.71em;
-      font-family: 'Space Mono', 'Fira Code', monospace;
+
+    #panel-skills .domain-sub {
+      /* Muted gloss line — readable but clearly secondary */
+      font-size: 0.72em;
+      line-height: 1.45;
       color: var(--color-text-muted, #8a9bb0);
-      line-height: 1.55;
-      letter-spacing: 0.02em;
-      border-top: 1px solid var(--color-border, rgba(255,255,255,0.07));
-      padding-top: 0.48em;
-      margin-bottom: 0.4em;
+      font-style: italic;
+      letter-spacing: 0.01em;
+      /* Slight left indent so it reads as a caption under the stack line */
+      padding-left: 0.1em;
     }
+
+    /* Tighten on small screens — sub line wraps gracefully */
     @media (max-width: 480px) {
-      .skill-box .skill-value { font-size: 0.87em; }
-      .skill-box .skill-tech  { font-size: 0.67em; }
+      #panel-skills .domain-sub {
+        font-size: 0.68em;
+      }
     }
   </style>
 
@@ -266,7 +242,7 @@
       <span class="panel-label">Ambel Basha</span>
       <h1>I Build Things<br>That Hold Up.</h1>
       <div class="corridor-picture" role="img" aria-label="Ambel Basha profile photo"></div>
-      <p>I create websites, apps, and digital systems — and I make sure they're secure from day one.</p>
+      <p>Full-Stack Developer &amp; Security Engineer — web systems built to work, and built to stay secure.</p>
       <div class="cta-buttons">
         <a href="portfolio.html" class="cta-btn">
           <i class="fas fa-briefcase" aria-hidden="true"></i> See My Work
@@ -279,13 +255,13 @@
   <!-- Milestone A: About Me -->
   <div id="panel-about-milestone" class="corridor-panel">
     <div class="panel-content">
-      <span class="panel-label">Who I Am</span>
-      <h2>Engineer.<br>Security included.</h2>
-      <p>I'm Ambel — I build digital systems and I secure them. Most developers treat security as someone else's job. I treat it as part of mine.</p>
+      <span class="panel-label">Milestone · Who I Am</span>
+      <h2>Developer.<br>By nature. By design.</h2>
+      <p>I'm Ambel — a Computer Engineer who treats building and securing as one discipline, not two separate jobs. Most developers hand security off. I don't.</p>
       <ul class="domain-list">
-        <li><span class="domain-dot domain-dot--gold"></span>I think about how things break — before they do</li>
-        <li><span class="domain-dot domain-dot--gold"></span>I own the full process: design, build, harden, ship</li>
-        <li><span class="domain-dot domain-dot--gold"></span>Athens-based, available worldwide</li>
+        <li><span class="domain-dot domain-dot--gold"></span>Curious about how systems break — and how to prevent it</li>
+        <li><span class="domain-dot domain-dot--gold"></span>End-to-end ownership: design → build → harden → ship</li>
+        <li><span class="domain-dot domain-dot--gold"></span>Based in Athens, Greece — open to global work</li>
       </ul>
       <a href="#about" class="corridor-link">My full story ↓</a>
       <div class="milestone-dots">
@@ -302,17 +278,17 @@
   <!-- Milestone B: What I Solve -->
   <div id="panel-deliver-milestone" class="corridor-panel">
     <div class="panel-content">
-      <span class="panel-label">What I Solve</span>
-      <h2>Your problem.<br>My domain.</h2>
-      <p>Whatever stage your project is at — I move it forward. Here's where I add value.</p>
+      <span class="panel-label">Milestone · What I Solve</span>
+      <h2>Problems I Solve<br>for You</h2>
+      <p>Whatever stage your project is at — I bring it forward. Here's what that looks like in practice.</p>
       <ul class="domain-list">
-        <li><span class="domain-dot"></span>No website yet — I build it right from the start</li>
-        <li><span class="domain-dot"></span>Data is a mess or at risk — I organise and protect it</li>
-        <li><span class="domain-dot"></span>Tasks eating your team's time — I automate them</li>
-        <li><span class="domain-dot"></span>Something feels insecure — I find out why, and fix it</li>
-        <li><span class="domain-dot"></span>Existing system needs improvement — I audit and deliver</li>
+        <li><span class="domain-dot"></span>Need a website or app — built properly, not just delivered</li>
+        <li><span class="domain-dot"></span>Data scattered or exposed — I organize and lock it down</li>
+        <li><span class="domain-dot"></span>Repetitive tasks draining your team — I automate them</li>
+        <li><span class="domain-dot"></span>Worried about security gaps — I find and close them</li>
+        <li><span class="domain-dot"></span>Existing system needs work — I audit, harden, and improve it</li>
       </ul>
-      <a href="#skills" class="corridor-link">See what I use to do it ↓</a>
+      <a href="#skills" class="corridor-link">See the full stack ↓</a>
       <div class="milestone-dots">
         <div class="milestone-dot"></div>
         <div class="milestone-dot active"></div>
@@ -329,68 +305,61 @@
     <div class="panel-content">
       <span class="panel-label">The Stack</span>
       <h2>Full-Spectrum<br>Engineering</h2>
-      <ul class="domain-list domain-list--layered">
+      <ul class="domain-list">
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">Web</span>
-            <span class="domain-value">Full websites and apps — from how they look to how they run on the server.</span>
-            <span class="domain-tech">Python · Java · C++ · PHP · JavaScript · HTML5 · CSS3</span>
+            <span class="domain-main">Web — Python · Java · C++ · PHP · JavaScript · HTML5 · CSS3</span>
+            <span class="domain-sub">Full websites and web applications — from the server logic to what you see on screen.</span>
           </span>
         </li>
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">Databases</span>
-            <span class="domain-value">Your data stored cleanly, retrieved fast, and protected against tampering.</span>
-            <span class="domain-tech">MySQL · MariaDB · Schema Design · Stored Procedures · Functions</span>
+            <span class="domain-main">Databases — MySQL · MariaDB · Schema Design · Stored Procedures · Functions</span>
+            <span class="domain-sub">Structured data storage — organised, fast, and guarded against leaks or corruption.</span>
           </span>
         </li>
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">Security</span>
-            <span class="domain-value">Built-in protection — user data stays private, attacks get blocked, not patched later.</span>
-            <span class="domain-tech">OWASP · SQLi &amp; XSS Prevention · Cryptography · Threat Modelling</span>
+            <span class="domain-main">Security — OWASP · SQLi &amp; XSS Prevention · Crypto</span>
+            <span class="domain-sub">Every system I ship is hardened — so user data stays private and attacks fail at the door.</span>
           </span>
         </li>
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">Linux</span>
-            <span class="domain-value">Servers that run themselves — automated, monitored, and recovered without manual effort.</span>
-            <span class="domain-tech">Bash · Deployment Pipelines · System Monitoring · Forensics</span>
+            <span class="domain-main">Linux — Bash · Deployment Pipelines · Forensics</span>
+            <span class="domain-sub">Server automation and monitoring — the infrastructure layer that keeps systems running reliably.</span>
           </span>
         </li>
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">Metadata</span>
-            <span class="domain-value">Digital files and records organised so they stay findable and preserved long-term.</span>
-            <span class="domain-tech">Structural · Geo · Archival Systems · TEI · METS</span>
+            <span class="domain-main">Metadata — Structural · Geo · Archival Systems</span>
+            <span class="domain-sub">Organising and describing digital assets so they stay findable, usable, and preserved long-term.</span>
           </span>
         </li>
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">IoT</span>
-            <span class="domain-value">Physical hardware connected to the internet — devices that sense, respond, and report.</span>
-            <span class="domain-tech">Raspberry Pi · Sense HAT · Alexa VS · Motion &amp; Apache Servers</span>
+            <span class="domain-main">IoT — Raspberry Pi · Sense HAT · Alexa VS · Motion &amp; Apache Servers</span>
+            <span class="domain-sub">Physical devices connected to the internet — hardware prototypes that sense, respond, and communicate.</span>
           </span>
         </li>
 
         <li>
           <span class="domain-dot"></span>
           <span class="domain-body">
-            <span class="domain-label">QA</span>
-            <span class="domain-value">Problems caught before users see them — tested at every stage, not just at the end.</span>
-            <span class="domain-tech">TDD · Manual &amp; Automated Testing · Regression · Code Review</span>
+            <span class="domain-main">QA — TDD · Manual &amp; Automated Testing</span>
+            <span class="domain-sub">Bugs caught before launch, not after — through disciplined testing at every stage of development.</span>
           </span>
         </li>
 
@@ -403,15 +372,15 @@
   <div id="panel-security" class="corridor-panel">
     <div class="panel-content">
       <span class="panel-label">Security-First</span>
-      <h2>Hardened<br>by Design</h2>
-      <p>Security isn't a final step — it's a constraint I design around from the start. Here's what that means in practice.</p>
+      <h2>Hardened by Design</h2>
+      <p>Security is built into every system from day one — not patched on after something breaks.</p>
       <ul class="domain-list">
-        <li><span class="domain-dot domain-dot--gold"></span>Threat modelling before a single line of code ships</li>
-        <li><span class="domain-dot domain-dot--gold"></span>SQL injection and XSS closed at the architecture level</li>
-        <li><span class="domain-dot domain-dot--gold"></span>Encrypted pipelines and hardened data storage</li>
-        <li><span class="domain-dot domain-dot--gold"></span>Audit-ready — existing systems assessed and documented</li>
+        <li><span class="domain-dot domain-dot--gold"></span>OWASP threat modeling &amp; SQLi / XSS prevention</li>
+        <li><span class="domain-dot domain-dot--gold"></span>Encrypted data pipelines &amp; cryptography</li>
+        <li><span class="domain-dot domain-dot--gold"></span>Buffer overflow &amp; injection mitigation</li>
+        <li><span class="domain-dot domain-dot--gold"></span>Audit &amp; hardening of existing infrastructure</li>
       </ul>
-      <p>The result: your users' data stays private, your application resists real attacks, and you know exactly where your exposure is.</p>
+      <p>In plain terms: your users' data stays private, your application resists attacks, and vulnerabilities are closed before they're exploited.</p>
     </div>
   </div>
 
@@ -419,8 +388,8 @@
   <div id="panel-cta" class="corridor-panel">
     <div class="panel-content panel-content--center">
       <span class="panel-label">Let's Work Together</span>
-      <h2>Ready when<br>you are.</h2>
-      <p>New build, security audit, or improving something that already exists — I deliver complete, documented work. Available for freelance and full-time engagements.</p>
+      <h2>Your next project<br>deserves a solid foundation.</h2>
+      <p>New build, security audit, or hardening something existing — I deliver complete, documented work. Available for freelance and full-time engagements.</p>
       <div class="cta-buttons">
         <a href="MyWebSites/About/index.html#contact" class="cta-btn">
           <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
@@ -436,15 +405,15 @@
   <!-- Milestone C: Footer / Connect -->
   <div id="panel-footer-milestone" class="corridor-panel">
     <div class="panel-content panel-content--center">
-      <span class="panel-label">End of the Tour</span>
-      <h2>One conversation<br>is all it takes.</h2>
-      <p>No pitch, no pressure — just a direct conversation about what you need and whether I'm the right person to build it.</p>
+      <span class="panel-label">Milestone · End of Journey</span>
+      <h2>Every great project<br>starts with one question.</h2>
+      <p>You've seen what I build and how I think. If any of it clicked — reach out. No pitch, no pressure. Just a conversation about what we could make together.</p>
       <ul class="domain-list">
         <li><span class="domain-dot domain-dot--gold"></span>I reply within 24 hours</li>
-        <li><span class="domain-dot"></span>Open to freelance and full-time roles</li>
-        <li><span class="domain-dot domain-dot--gold"></span>Athens-based — available globally</li>
+        <li><span class="domain-dot"></span>Open to freelance &amp; full-time roles</li>
+        <li><span class="domain-dot domain-dot--gold"></span>Based in Athens — available globally</li>
       </ul>
-      <a href="#footer-container" class="corridor-link">Reach out ↓</a>
+      <a href="#footer-container" class="corridor-link">Scroll to connect ↓</a>
       <div class="milestone-dots">
         <div class="milestone-dot"></div>
         <div class="milestone-dot"></div>
@@ -470,16 +439,21 @@
     <div class="container">
       <h2>About Me</h2>
       <p class="hero-overview">
-        A Computer Engineer who builds things that are
+        A Computer Engineer who delivers
         <span class="highlight-secure">secure</span>,
-        <span class="highlight-efficient">reliable</span>, and
-        <span class="highlight-innovative">built to last</span>.
+        <span class="highlight-efficient">efficient</span>, and
+        <span class="highlight-innovative">purposeful solutions</span> — not just code.
       </p>
       <p>
-        I graduated in Computer Engineering from UNIWA, Athens. I build complete web systems — front-end, back-end, database, and infrastructure — with security treated as a core requirement, not an afterthought. Every system I deliver is also hardened: protected databases, encrypted pipelines, and defences against the attacks that expose data or take services offline.
+        Computer Engineering graduate from UNIWA, Athens. I build full-stack web applications
+        with security as a core discipline — every system I ship is also hardened against the
+        attacks that expose data or take services offline. From protected databases and encrypted
+        pipelines to Bash-automated infrastructure and IoT prototypes, I work across the full
+        depth of a system — not just the layer users see.
       </p>
       <p>
-        Whether you need something built from scratch, an existing system improved, or a security audit with clear findings — I deliver documented work that holds up under real conditions.
+        New build, security audit, performance fix, or end-to-end development — I deliver
+        complete, documented work that holds up under real-world conditions.
       </p>
       <p class="about-links">
         <a href="MyWebSites/About/index.html" class="about-link about-link-read">
@@ -502,56 +476,41 @@
   <div class="container">
     <h2>What I Bring</h2>
     <div class="skill-boxes">
-
       <a href="portfolio.html#web" class="skill-box">
         <h3>Web Development</h3>
-        <p class="skill-value">I build complete websites and web applications — everything from the page you see to the server logic running behind it.</p>
-        <p class="skill-tech">Python · Java · C++ · PHP · JavaScript · HTML5 · CSS3</p>
+        <p>End-to-end web applications using PHP, JavaScript, Java, Python, C++, HTML, and CSS — from a minimal prototype to a production system.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
       <a href="portfolio.html#database" class="skill-box">
         <h3>Databases</h3>
-        <p class="skill-value">Your data structured, stored, and protected — fast to query, impossible to corrupt, and closed to injection attacks.</p>
-        <p class="skill-tech">MySQL · MariaDB · Schema Design · Normalisation · Stored Procedures · Functions</p>
+        <p>Secure, normalized database design with MySQL and MariaDB — properly indexed, performance-tuned, and guarded against injection.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
       <a href="portfolio.html#cyber" class="skill-box">
         <h3>Cybersecurity</h3>
-        <p class="skill-value">Security applied, not theoretical — threats modelled before build, vulnerabilities closed before deployment, not after a breach.</p>
-        <p class="skill-tech">OWASP · SQLi &amp; XSS Prevention · Buffer Overflow Mitigation · Cryptography · Threat Modelling</p>
+        <p>OWASP-based threat modeling, SQLi and XSS prevention, buffer overflow mitigation, cryptography, and data encryption — applied, not theoretical.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
       <a href="portfolio.html#linux" class="skill-box">
         <h3>Linux &amp; Automation</h3>
-        <p class="skill-value">Servers that run themselves — deployment automated, monitoring in place, repetitive admin tasks scripted out of existence.</p>
-        <p class="skill-tech">Bash · Deployment Pipelines · System Monitoring · Forensic Analysis · Admin Automation</p>
+        <p>Advanced Bash scripting for deployment pipelines, system monitoring, forensic analysis, and administrative automation workflows.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
       <a href="portfolio.html#metadata" class="skill-box">
         <h3>Metadata Systems</h3>
-        <p class="skill-value">Digital records and files organised with precision — structured so they stay discoverable, usable, and preserved over time.</p>
-        <p class="skill-tech">TEI · METS · Structural &amp; Geo Metadata · Archival Schemas · Custom Vocabularies</p>
+        <p>Descriptive, structural, and administrative metadata using TEI, METS, and custom schemas — for archives, research systems, and digital libraries.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
       <a href="portfolio.html" class="skill-box">
         <h3>IoT &amp; Hardware</h3>
-        <p class="skill-value">Physical hardware brought online — devices that sense the real world, process it, and communicate back to a system.</p>
-        <p class="skill-tech">Raspberry Pi · Sense HAT · Alexa Voice Service · Motion &amp; Apache Servers</p>
+        <p>Hardware-to-cloud prototypes with Raspberry Pi, Sense HAT, and Alexa Voice Service — including my BSc thesis project.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
       <a href="portfolio.html" class="skill-box">
         <h3>Quality Assurance</h3>
-        <p class="skill-value">Bugs found before users do — a testing discipline that starts at design and runs through every stage of delivery.</p>
-        <p class="skill-tech">TDD · Unit &amp; Integration Testing · Manual Testing · Regression · Code Review</p>
+        <p>Manual and automated testing with a TDD discipline — catching defects at the design stage, not after deployment.</p>
         <span class="skill-bar" aria-hidden="true"></span>
       </a>
-
     </div>
   </div>
 </section>
