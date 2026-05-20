@@ -35,57 +35,6 @@
   <link rel="stylesheet" href="Styles/Index/Skills&Responsive/skills&ResponsiveStyles.css" />
   <link rel="stylesheet" href="Styles/Index/Corridor/corridorStyles.css" />
 
-  <style>
-    /* ── Panel-skills: two-tier domain list ─────────────────────────────────
-       .domain-main  = the tech stack line  (existing visible weight)
-       .domain-sub   = plain-English gloss  (muted, smaller, for all audiences)
-    ─────────────────────────────────────────────────────────────────────── */
-
-    #panel-skills .domain-list li {
-      /* Allow dot + body to sit side-by-side */
-      display: flex;
-      align-items: flex-start;
-      gap: 0.55em;
-      /* A little more vertical room now each item has two lines */
-      margin-bottom: 0.65em;
-    }
-
-    #panel-skills .domain-dot {
-      /* Keep dot vertically centred to the main line, not the whole block */
-      margin-top: 0.35em;
-      flex-shrink: 0;
-    }
-
-    #panel-skills .domain-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.18em;
-    }
-
-    #panel-skills .domain-main {
-      /* Inherits the existing .domain-list li font — no change for tech readers */
-      line-height: 1.35;
-    }
-
-    #panel-skills .domain-sub {
-      /* Muted gloss line — readable but clearly secondary */
-      font-size: 0.72em;
-      line-height: 1.45;
-      color: var(--color-text-muted, #8a9bb0);
-      font-style: italic;
-      letter-spacing: 0.01em;
-      /* Slight left indent so it reads as a caption under the stack line */
-      padding-left: 0.1em;
-    }
-
-    /* Tighten on small screens — sub line wraps gracefully */
-    @media (max-width: 480px) {
-      #panel-skills .domain-sub {
-        font-size: 0.68em;
-      }
-    }
-  </style>
-
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -306,63 +255,13 @@
       <span class="panel-label">The Stack</span>
       <h2>Full-Spectrum<br>Engineering</h2>
       <ul class="domain-list">
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">Web — Python · Java · C++ · PHP · JavaScript · HTML5 · CSS3</span>
-            <span class="domain-sub">Full websites and web applications — from the server logic to what you see on screen.</span>
-          </span>
-        </li>
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">Databases — MySQL · MariaDB · Schema Design · Stored Procedures · Functions</span>
-            <span class="domain-sub">Structured data storage — organised, fast, and guarded against leaks or corruption.</span>
-          </span>
-        </li>
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">Security — OWASP · SQLi &amp; XSS Prevention · Crypto</span>
-            <span class="domain-sub">Every system I ship is hardened — so user data stays private and attacks fail at the door.</span>
-          </span>
-        </li>
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">Linux — Bash · Deployment Pipelines · Forensics</span>
-            <span class="domain-sub">Server automation and monitoring — the infrastructure layer that keeps systems running reliably.</span>
-          </span>
-        </li>
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">Metadata — Structural · Geo · Archival Systems</span>
-            <span class="domain-sub">Organising and describing digital assets so they stay findable, usable, and preserved long-term.</span>
-          </span>
-        </li>
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">IoT — Raspberry Pi · Sense HAT · Alexa VS · Motion &amp; Apache Servers</span>
-            <span class="domain-sub">Physical devices connected to the internet — hardware prototypes that sense, respond, and communicate.</span>
-          </span>
-        </li>
-
-        <li>
-          <span class="domain-dot"></span>
-          <span class="domain-body">
-            <span class="domain-main">QA — TDD · Manual &amp; Automated Testing</span>
-            <span class="domain-sub">Bugs caught before launch, not after — through disciplined testing at every stage of development.</span>
-          </span>
-        </li>
-
+        <li><span class="domain-dot"></span>Web — PHP · JavaScript · Python · Java · C++</li>
+        <li><span class="domain-dot"></span>Databases — MySQL · MariaDB · schema design</li>
+        <li><span class="domain-dot"></span>Security — OWASP · SQLi &amp; XSS prevention · crypto</li>
+        <li><span class="domain-dot"></span>Linux — Bash · deployment pipelines · forensics</li>
+        <li><span class="domain-dot"></span>Metadata — TEI · METS · archival systems</li>
+        <li><span class="domain-dot"></span>IoT — Raspberry Pi · Sense HAT · Alexa VS</li>
+        <li><span class="domain-dot"></span>QA — TDD · manual &amp; automated testing</li>
       </ul>
       <a href="#skills" class="corridor-link">See skills in detail ↓</a>
     </div>
